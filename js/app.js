@@ -33,6 +33,8 @@
   }
 
   function initSantaScheduler() {
+    const santaEl = document.getElementById('santa-sleigh');
+    if (!santaEl) return;
     triggerSantaSleigh();
     santaTimer = setInterval(() => {
       triggerSantaSleigh();

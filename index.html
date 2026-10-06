@@ -23,7 +23,7 @@
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
 
   <!-- CUSTOM STYLES -->
-  <link rel="stylesheet" href="css/style.css?v=13.0">
+  <link rel="stylesheet" href="css/style.css?v=14.0">
 
   <!-- INSTANT HUB VIEW: Loại bỏ hoàn toàn độ trễ / giật của Bước 1 khi quay lại ?step=hub -->
   <script>
@@ -262,137 +262,13 @@
     </div>
   </div>
 
-  <!-- 1. BẦU TRỜ ĐÊM & CỰC QUANG (AURORA BOREALIS) -->
-  <div class="night-sky">
-    <div class="aurora-layer"></div>
-    <div class="aurora-layer-2"></div>
-    <div class="aurora-layer-3"></div>
-    <div class="stars-overlay"></div>
-  </div>
-
-  <!-- 2. CANVAS TUYẾT RƠI 3D VẬT LÝ & VỆT SAO BỤI THẦN TIÊN -->
+  <!-- 2. CANVAS TUYẾT RƠI 3D VẬT LÝ & VỆT SAO BỤI THẦN TIÊN (CHẠY TRÊN THẺ INTRO) -->
   <canvas id="snow-canvas"></canvas>
   <canvas id="magic-trail-canvas" class="magic-trail-canvas" aria-hidden="true"></canvas>
 
-  <!-- 3. DÂY ĐÈN LED GIÁNG SINH TREO MÀN HÌNH (LIỀN MẠCH, KHÔNG VẾT CẮT) -->
-  <div class="fairy-lights-container" aria-hidden="true">
-    <div class="fairy-lights-track">
-      <div class="fairy-light-unit">
-        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
-          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
-        </svg>
-        <div class="bulb-socket-cap"></div>
-        <div class="bulb-item bulb-gold"></div>
-      </div>
-      <div class="fairy-light-unit">
-        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
-          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
-        </svg>
-        <div class="bulb-socket-cap"></div>
-        <div class="bulb-item bulb-red"></div>
-      </div>
-      <div class="fairy-light-unit">
-        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
-          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
-        </svg>
-        <div class="bulb-socket-cap"></div>
-        <div class="bulb-item bulb-green"></div>
-      </div>
-      <div class="fairy-light-unit">
-        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
-          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
-        </svg>
-        <div class="bulb-socket-cap"></div>
-        <div class="bulb-item bulb-blue"></div>
-      </div>
-      <div class="fairy-light-unit">
-        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
-          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
-        </svg>
-        <div class="bulb-socket-cap"></div>
-        <div class="bulb-item bulb-pink"></div>
-      </div>
-      <div class="fairy-light-unit">
-        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
-          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
-        </svg>
-        <div class="bulb-socket-cap"></div>
-        <div class="bulb-item bulb-gold"></div>
-      </div>
-      <div class="fairy-light-unit">
-        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
-          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
-        </svg>
-        <div class="bulb-socket-cap"></div>
-        <div class="bulb-item bulb-red"></div>
-      </div>
-      <div class="fairy-light-unit">
-        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
-          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
-        </svg>
-        <div class="bulb-socket-cap"></div>
-        <div class="bulb-item bulb-green"></div>
-      </div>
-      <div class="fairy-light-unit">
-        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
-          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
-        </svg>
-        <div class="bulb-socket-cap"></div>
-        <div class="bulb-item bulb-blue"></div>
-      </div>
-      <div class="fairy-light-unit">
-        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
-          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
-        </svg>
-        <div class="bulb-socket-cap"></div>
-        <div class="bulb-item bulb-gold"></div>
-      </div>
-      <div class="fairy-light-unit">
-        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
-          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
-        </svg>
-        <div class="bulb-socket-cap"></div>
-        <div class="bulb-item bulb-pink"></div>
-      </div>
-      <div class="fairy-light-unit">
-        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
-          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
-        </svg>
-        <div class="bulb-socket-cap"></div>
-        <div class="bulb-item bulb-red"></div>
-      </div>
-      <div class="fairy-light-unit">
-        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
-          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
-        </svg>
-        <div class="bulb-socket-cap"></div>
-        <div class="bulb-item bulb-green"></div>
-      </div>
-      <div class="fairy-light-unit">
-        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
-          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
-        </svg>
-        <div class="bulb-socket-cap"></div>
-        <div class="bulb-item bulb-blue"></div>
-      </div>
-      <div class="fairy-light-unit">
-        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
-          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
-        </svg>
-        <div class="bulb-socket-cap"></div>
-        <div class="bulb-item bulb-gold"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 4. CỖ XE TUẦN LỘC SANTA BAY LƯỚT QUA BẦU TRỜ -->
-  <div id="santa-sleigh" class="santa-fly-track" aria-hidden="true">
-    <div class="stardust-tail"></div>
-  </div>
-
   <!-- JAVASCRIPT -->
-  <script src="js/common.js"></script>
-  <script src="js/app.js"></script>
+  <script src="js/common.js?v=14.0"></script>
+  <script src="js/app.js?v=14.0"></script>
 </body>
 
 </html>

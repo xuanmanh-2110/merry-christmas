@@ -143,10 +143,12 @@
   }
 
   function initSantaScheduler() {
+    const santaEl = document.getElementById('santa-sleigh');
+    if (!santaEl) return;
     triggerSantaSleigh();
     santaTimer = setInterval(() => {
       triggerSantaSleigh();
-    }, 28000);
+    }, 35000);
   }
 
   // 4. CONFETTI BURST
