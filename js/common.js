@@ -126,93 +126,14 @@
   window.XMAS_SHARED.SnowEngine = SnowEngine;
 
   /* --------------------------------------------------------------------------
-   * MAGIC TRAIL ENGINE (Bụi sao thần tiên theo con trỏ chuột / cảm ứng)
+   * MAGIC TRAIL ENGINE (Bụi sao thần tiên - Đã tắt theo yêu cầu người dùng)
    * -------------------------------------------------------------------------- */
   class MagicTrailEngine {
-    constructor(canvasId) {
-      this.canvas = document.getElementById(canvasId);
-      if (!this.canvas) return;
-      this.ctx = this.canvas.getContext('2d');
-      this.sparks = [];
-      this.isRunning = true;
-      this.isLooping = false;
-
-      this.init();
+    constructor() {
+      // Disabled per user request
     }
-
-    init() {
-      this.resize();
-      window.addEventListener('resize', () => this.resize(), { passive: true });
-
-      const addPointer = (x, y) => {
-        for (let i = 0; i < 2; i++) {
-          this.sparks.push({
-            x: x + (Math.random() - 0.5) * 14,
-            y: y + (Math.random() - 0.5) * 14,
-            vx: (Math.random() - 0.5) * 1.5,
-            vy: (Math.random() - 0.5) * 1.5 - 0.5,
-            size: Math.random() * 3.5 + 1.2,
-            opacity: 1,
-            color: ['#fef08a', '#ffd700', '#ffffff', '#fbcfe8'][Math.floor(Math.random() * 4)],
-            life: 1
-          });
-        }
-        if (!this.isLooping && this.isRunning) {
-          this.isLooping = true;
-          this.loop();
-        }
-      };
-
-      window.addEventListener('pointermove', (e) => addPointer(e.clientX, e.clientY), { passive: true });
-      window.addEventListener('touchmove', (e) => {
-        if (e.touches && e.touches[0]) {
-          addPointer(e.touches[0].clientX, e.touches[0].clientY);
-        }
-      }, { passive: true });
-
-      this.loop = this.loop.bind(this);
-    }
-
-    resize() {
-      if (!this.canvas) return;
-      this.canvas.width = window.innerWidth;
-      this.canvas.height = window.innerHeight;
-    }
-
-    loop() {
-      if (!this.isRunning || !this.ctx) return;
-      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-      if (this.sparks.length === 0) {
-        this.isLooping = false;
-        return;
-      }
-
-      for (let i = this.sparks.length - 1; i >= 0; i--) {
-        const s = this.sparks[i];
-        s.x += s.vx;
-        s.y += s.vy;
-        s.life -= 0.035;
-        s.size *= 0.96;
-
-        if (s.life <= 0 || s.size <= 0.4) {
-          this.sparks.splice(i, 1);
-          continue;
-        }
-
-        this.ctx.save();
-        this.ctx.globalAlpha = Math.max(0, s.life);
-        this.ctx.fillStyle = s.color;
-        this.ctx.shadowBlur = 8;
-        this.ctx.shadowColor = s.color;
-        this.ctx.beginPath();
-        this.ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
-        this.ctx.fill();
-        this.ctx.restore();
-      }
-
-      requestAnimationFrame(this.loop);
-    }
+    init() {}
+    loop() {}
   }
 
   window.XMAS_SHARED.MagicTrailEngine = MagicTrailEngine;

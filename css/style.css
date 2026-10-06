@@ -2006,13 +2006,9 @@ body.card-opened-mode .toast-notice.show {
 /* --------------------------------------------------------------------------
    13. VỆT SAO BỤI THẦN TIÊN (MAGIC STARDUST TRAIL CANVAS)
    -------------------------------------------------------------------------- */
-.magic-trail-canvas {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 106 !important;
+.magic-trail-canvas, #magic-trail-canvas {
+  display: none !important;
+  pointer-events: none !important;
 }
 
 /* --------------------------------------------------------------------------
@@ -2831,87 +2827,11 @@ body.card-opened-mode .toast-notice.show {
   }
 }
 
-/* Khung viền chỉ vàng hoàng gia trang trí toàn màn hình */
-.intro-parchment-card::before {
-  content: '';
-  position: absolute;
-  inset: 12px;
-  border: 1px solid rgba(245, 207, 104, 0.4);
-  border-radius: 20px;
-  pointer-events: none;
-  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.55), 0 0 25px rgba(245, 207, 104, 0.12);
-}
-
-.intro-parchment-card::after {
-  content: '';
-  position: absolute;
-  inset: 18px;
-  border: 1px dashed rgba(245, 207, 104, 0.22);
-  border-radius: 16px;
-  pointer-events: none;
-}
-
-@media (min-width: 640px) {
-  .intro-parchment-card::before {
-    inset: 18px;
-    border-width: 1.5px;
-    border-radius: 24px;
-  }
-  .intro-parchment-card::after {
-    inset: 26px;
-  }
-}
-
-/* 4 Góc hoa văn viền vàng hoàng gia sang trọng (Corner Ornaments) */
+/* Khung viền chỉ vàng hoàng gia & 4 góc - Đã ẩn theo yêu cầu người dùng */
+.intro-parchment-card::before,
+.intro-parchment-card::after,
 .intro-corner-ornament {
-  position: absolute;
-  width: 32px;
-  height: 32px;
-  pointer-events: none;
-  z-index: 3;
-}
-
-.intro-corner-tl {
-  top: 14px;
-  left: 14px;
-  border-top: 3px double #fcd34d;
-  border-left: 3px double #fcd34d;
-  border-top-left-radius: 14px;
-}
-
-.intro-corner-tr {
-  top: 14px;
-  right: 14px;
-  border-top: 3px double #fcd34d;
-  border-right: 3px double #fcd34d;
-  border-top-right-radius: 14px;
-}
-
-.intro-corner-bl {
-  bottom: 14px;
-  left: 14px;
-  border-bottom: 3px double #fcd34d;
-  border-left: 3px double #fcd34d;
-  border-bottom-left-radius: 14px;
-}
-
-.intro-corner-br {
-  bottom: 14px;
-  right: 14px;
-  border-bottom: 3px double #fcd34d;
-  border-right: 3px double #fcd34d;
-  border-bottom-right-radius: 14px;
-}
-
-@media (min-width: 640px) {
-  .intro-corner-ornament {
-    width: 44px;
-    height: 44px;
-  }
-  .intro-corner-tl { top: 22px; left: 22px; }
-  .intro-corner-tr { top: 22px; right: 22px; }
-  .intro-corner-bl { bottom: 22px; left: 22px; }
-  .intro-corner-br { bottom: 22px; right: 22px; }
+  display: none !important;
 }
 
 /* Các bông tuyết & ngôi sao vàng lấp lánh trang trí trôi nhẹ */
