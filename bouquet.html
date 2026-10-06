@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="vi" class="h-full bouquet-html">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Bó Hoa Tình Yêu 🌷 - Món Quà Ngọt Ngào</title>
+
+  <!-- GOOGLE FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@600;700;800&family=Dancing+Script:wght@400;500;600;700&family=Great+Vibes&family=Mountains+of+Christmas:wght@700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Quicksand:wght@500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- TAILWIND CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- FONT AWESOME ICONS CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- CANVAS-CONFETTI CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+  <!-- PRELOAD FLOWER ASSETS -->
+  <link rel="preload" as="image" href="assets/flowers/flower_curtain_mobile.jpg">
+  <link rel="preload" as="image" href="assets/flowers/flower_curtain_gen.jpg">
+  <link rel="preload" as="image" href="assets/flowers/flower_light_blue_rose_thumb.png">
+  <link rel="preload" as="image" href="assets/flowers/flower_purple_rose_thumb.png">
+  <link rel="preload" as="image" href="assets/flowers/flower_purple_dahlia_thumb.png">
+  <link rel="preload" as="image" href="assets/flowers/flower_blue_iris_thumb.png">
+  <link rel="preload" as="image" href="assets/flowers/flower_light_purple_lily_thumb.png">
+  <link rel="preload" as="image" href="assets/flowers/flower_light_pink_rose_thumb.png">
+
+  <!-- CUSTOM STYLES -->
+  <link rel="stylesheet" href="css/style.css?v=6.7">
+</head>
+
+<body class="bg-[#040914] text-white flex flex-col min-h-screen min-h-[100dvh] bouquet-page">
+  <!-- CANVAS HIỆU ỨNG TUYẾT RƠI & VỆT SAO -->
+  <canvas id="snow-canvas"></canvas>
+  <canvas id="magic-trail-canvas" class="magic-trail-canvas" aria-hidden="true"></canvas>
+
+  <!-- SVG DEFINITIONS CHO CẢNH QUAN GIÁNG SINH -->
+  <svg width="0" height="0" class="absolute pointer-events-none">
+    <defs>
+      <linearGradient id="garlandRedBauble" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#ff6b81" />
+        <stop offset="50%" stop-color="#ee5253" />
+        <stop offset="100%" stop-color="#a51717" />
+      </linearGradient>
+      <linearGradient id="garlandGoldBauble" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#fff9db" />
+        <stop offset="45%" stop-color="#ffd43b" />
+        <stop offset="100%" stop-color="#d97706" />
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <!-- DÂY ĐÈN LED GIÁNG SINH TREO MÀN HÌNH -->
+  <div class="fairy-lights-container" aria-hidden="true">
+    <div class="fairy-lights-track">
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-gold"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-red"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-green"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-blue"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-pink"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-gold"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-red"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-green"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-blue"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-gold"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-pink"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-red"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-green"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-gold"></div></div>
+    </div>
+  </div>
+
+  <!-- CÀNH THÔNG & QUẢ CHÂU TRANG TRÍ 2 GÓC TRÊN MÀN HÌNH -->
+  <div class="corner-garland corner-garland-left" aria-hidden="true">
+    <svg viewBox="0 0 200 160" class="w-16 sm:w-28 md:w-40 h-auto overflow-visible filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+      <path d="M-20 -20 Q40 30 110 35 Q150 40 180 20" fill="none" stroke="#1b4332" stroke-width="12" stroke-linecap="round" />
+      <path d="M-20 -20 Q30 50 85 80 Q120 100 150 95" fill="none" stroke="#2d6a4f" stroke-width="8" stroke-linecap="round" />
+      <path d="M20 15 L35 45 M50 25 L75 55 M80 32 L115 60 M110 38 L145 55 M130 35 L165 38" stroke="#40916c" stroke-width="3" stroke-linecap="round" />
+      <path d="M10 30 L25 65 M40 50 L65 85 M65 65 L95 105 M95 80 L130 108" stroke="#52b788" stroke-width="2.5" stroke-linecap="round" />
+      <path d="M0 5 Q45 25 105 32 Q140 36 175 18" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity="0.9" />
+      <path d="M15 35 Q55 60 90 78 Q115 88 140 85" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" opacity="0.85" />
+      <circle cx="85" cy="45" r="4.5" fill="#dc2626" />
+      <circle cx="92" cy="48" r="4" fill="#b91c1c" />
+      <circle cx="88" cy="53" r="4.2" fill="#ef4444" />
+      <line x1="60" y1="35" x2="60" y2="95" stroke="#f5cf68" stroke-width="1.2" stroke-dasharray="2,2" />
+      <g class="swinging-bauble-left">
+        <circle cx="60" cy="115" r="18" fill="url(#garlandRedBauble)" filter="drop-shadow(0 6px 12px rgba(220,38,38,0.5))" />
+        <rect x="56" y="93" width="8" height="6" fill="#d4af37" rx="1.5" />
+        <path d="M45 115 Q60 125 75 115" fill="none" stroke="#fef08a" stroke-width="1.5" opacity="0.8" />
+        <circle cx="54" cy="108" r="2.5" fill="#ffffff" opacity="0.7" />
+      </g>
+      <line x1="125" y1="40" x2="125" y2="80" stroke="#f5cf68" stroke-width="1" />
+      <g class="swinging-bauble-right">
+        <circle cx="125" cy="92" r="12" fill="url(#garlandGoldBauble)" filter="drop-shadow(0 4px 10px rgba(245,207,104,0.6))" />
+        <rect x="122" y="78" width="6" height="4" fill="#b8860b" rx="1" />
+        <circle cx="121" cy="88" r="1.8" fill="#ffffff" opacity="0.8" />
+      </g>
+    </svg>
+  </div>
+
+  <div class="corner-garland corner-garland-right" aria-hidden="true">
+    <svg viewBox="0 0 200 160" class="w-16 sm:w-28 md:w-40 h-auto overflow-visible filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)] transform -scale-x-100">
+      <path d="M-20 -20 Q40 30 110 35 Q150 40 180 20" fill="none" stroke="#1b4332" stroke-width="12" stroke-linecap="round" />
+      <path d="M-20 -20 Q30 50 85 80 Q120 100 150 95" fill="none" stroke="#2d6a4f" stroke-width="8" stroke-linecap="round" />
+      <path d="M20 15 L35 45 M50 25 L75 55 M80 32 L115 60 M110 38 L145 55 M130 35 L165 38" stroke="#40916c" stroke-width="3" stroke-linecap="round" />
+      <path d="M0 5 Q45 25 105 32 Q140 36 175 18" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity="0.9" />
+      <line x1="75" y1="35" x2="75" y2="85" stroke="#f5cf68" stroke-width="1.2" stroke-dasharray="2,2" />
+      <g class="swinging-bauble-left">
+        <path d="M65 105 C65 92, 85 92, 85 105 L89 116 C91 120, 60 120, 62 116 Z" fill="url(#garlandGoldBauble)" filter="drop-shadow(0 6px 12px rgba(245,207,104,0.5))" />
+        <circle cx="75" cy="120" r="3.5" fill="#f59e0b" />
+        <path d="M75 92 C70 85, 62 88, 73 91 Z" fill="#ef4444" />
+        <path d="M75 92 C80 85, 88 88, 77 91 Z" fill="#ef4444" />
+      </g>
+    </svg>
+  </div>
+
+  <div class="intro-overlay standalone-overlay">
+    <div class="intro-backdrop"></div>
+    <div class="intro-card-container">
+      <div class="intro-card-step active standalone-subpage">
+        <div class="intro-parchment-card intro-subpage-card">
+          <!-- 4 Góc hoa văn viền vàng hoàng gia -->
+          <div class="intro-corner-ornament intro-corner-tl"></div>
+          <div class="intro-corner-ornament intro-corner-tr"></div>
+          <div class="intro-corner-ornament intro-corner-bl"></div>
+          <div class="intro-corner-ornament intro-corner-br"></div>
+
+          <!-- Bông tuyết & Ngôi sao trang trí lấp lánh -->
+          <div class="intro-sparkle intro-sparkle-1">✦</div>
+          <div class="intro-sparkle intro-sparkle-2">❄</div>
+          <div class="intro-sparkle intro-sparkle-3">★</div>
+          <div class="intro-sparkle intro-sparkle-4">❄</div>
+          <div class="intro-sparkle intro-sparkle-5">✦</div>
+          <div class="intro-sparkle intro-sparkle-6">★</div>
+
+          <!-- Tiêu đề trang -->
+          <div class="subpage-header">
+            <div class="intro-date-badge">
+              <span class="intro-badge-deco">✦</span> SWEETEST GIFT FOR YOU <span class="intro-badge-deco">✦</span>
+            </div>
+            <h2 class="intro-script-title subpage-title">Bó Hoa Trao Bạn</h2>
+            <div class="intro-gold-divider">
+              <span class="intro-divider-line"></span>
+              <span class="intro-divider-star">✦</span>
+              <span class="intro-divider-line"></span>
+            </div>
+            <p class="intro-hub-subtitle">Một chút ngọt ngào sưởi ấm mùa đông 🌷</p>
+          </div>
+
+          <!-- Nội dung Bó hoa & Quà tặng -->
+          <div class="bouquet-page-wrap">
+            <div class="bouquet-illustration-wrap" id="bouquet-interactive-target" title="Chạm vào bó hoa để nhận yêu thương ✨">
+              <div class="bouquet-ambient-glow"></div>
+              <img src="assets/intro/opt_bouquet.png" alt="Bó hoa Tulip Noel" class="bouquet-page-img" id="bouquet-img" />
+            </div>
+
+            <!-- Cụm nút quà tặng: Xem hoa, Nghe nhạc & Xem phim Noel -->
+            <div class="bouquet-action-btns flex flex-col items-center justify-center gap-2.5 sm:gap-3.5 w-full mt-2 sm:mt-3">
+              <button id="btn-hug-bouquet"
+                class="photobooth-btn photobooth-btn-red px-6 sm:px-8 py-2.5 sm:py-3 rounded-full shadow-2xl text-xs sm:text-sm font-bold transition-all" type="button">
+                <span>Xem hoa</span>
+              </button>
+
+              <!-- Khu vực giai điệu & phim mùa đông đính kèm -->
+              <div class="bouquet-media-gifts-wrap w-full flex flex-col items-center gap-2 mt-1 sm:mt-1.5">
+                <span class="text-[11px] sm:text-xs text-amber-200/80 font-medium tracking-wide flex items-center gap-1.5">
+                  <i class="fa-solid fa-gift text-amber-400 text-[10px]"></i>
+                  <span>Giai điệu & Thước phim dành riêng cho bạn</span>
+                </span>
+                <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 w-full">
+                  <a id="btn-spotify-song" href="https://open.spotify.com/intl-vi/track/2FRnf9qhLbvw8fu4IBXx78"
+                    target="_blank" rel="noopener noreferrer"
+                    class="bouquet-media-pill"
+                    title="Nghe bài hát Last Christmas trên Spotify">
+                    <i class="fa-brands fa-spotify text-[#1ed760]"></i>
+                    <span>Spotify • Last Christmas</span>
+                  </a>
+
+                  <a id="btn-youtube-song" href="https://youtu.be/E8gmARGvPlI?si=Y7VAZ_-ItmCTZl6v" target="_blank"
+                    rel="noopener noreferrer"
+                    class="bouquet-media-pill"
+                    title="Mở bài hát dành tặng bạn trên YouTube">
+                    <i class="fa-brands fa-youtube text-[#ff4444]"></i>
+                    <span>Wham! • Last Christmas</span>
+                  </a>
+
+                  <a id="btn-movie-xmas" href="https://luphim.com/xem-phim/home-alone-2-lost-in-new-york-402"
+                    target="_blank" rel="noopener noreferrer"
+                    class="bouquet-media-pill"
+                    title="Xem phim Giáng Sinh: Home Alone 2 - Lost in New York">
+                    <i class="fa-solid fa-film text-amber-300"></i>
+                    <span>Phim Noel • Home Alone 2</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Thanh điều hướng chân trang: Quay về Menu 4 lựa chọn -->
+          <div class="subpage-nav-bar">
+            <a href="index.html?step=hub" class="subpage-back-btn">
+              <i class="fa-solid fa-arrow-left text-xs"></i>
+              <span>Chọn món quà khác</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CANVAS HIỆU ỨNG HOA BÙNG NỔ TỪ TÂM BÓ HOA (FLOWER PARTICLE EXPLOSION) -->
+  <canvas id="flower-burst-canvas" class="flower-burst-canvas" aria-hidden="true"></canvas>
+
+  <!-- JAVASCRIPT -->
+  <script src="js/common.js"></script>
+  <script src="js/bouquet.js"></script>
+</body>
+
+</html>

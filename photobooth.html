@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="vi" class="h-full photobooth-html">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Photobooth Giáng Sinh 📷 - Khung Hình Kỷ Niệm</title>
+
+  <!-- GOOGLE FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@600;700;800&family=Dancing+Script:wght@400;500;600;700&family=Great+Vibes&family=Mountains+of+Christmas:wght@700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Quicksand:wght@500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- TAILWIND CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- FONT AWESOME ICONS CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- CANVAS-CONFETTI CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+  <!-- HTML2CANVAS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+  <!-- CROPPER.JS (Cắt ảnh chuẩn theo tỉ lệ khung photobooth) -->
+  <link rel="stylesheet" href="css/cropper.min.css">
+  <script src="js/cropper.min.js"></script>
+
+  <!-- CUSTOM STYLES -->
+  <link rel="stylesheet" href="css/style.css?v=13.0">
+</head>
+
+<body class="photobooth-page bg-[#1e0207] text-white flex flex-col min-h-screen min-h-[100dvh] !p-0 !m-0">
+  <!-- CANVAS HIỆU ỨNG TUYẾT RƠI & VỆT SAO -->
+  <canvas id="snow-canvas"></canvas>
+  <canvas id="magic-trail-canvas" class="magic-trail-canvas" aria-hidden="true"></canvas>
+
+  <!-- SVG DEFINITIONS CHO CẢNH QUAN GIÁNG SINH -->
+  <svg width="0" height="0" class="absolute pointer-events-none">
+    <defs>
+      <linearGradient id="garlandRedBauble" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#ff6b81" />
+        <stop offset="50%" stop-color="#ee5253" />
+        <stop offset="100%" stop-color="#a51717" />
+      </linearGradient>
+      <linearGradient id="garlandGoldBauble" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#fff9db" />
+        <stop offset="45%" stop-color="#ffd43b" />
+        <stop offset="100%" stop-color="#d97706" />
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <!-- DÂY ĐÈN LED GIÁNG SINH TREO MÀN HÌNH -->
+  <div class="fairy-lights-container" aria-hidden="true">
+    <div class="fairy-lights-track">
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-gold"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-red"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-green"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-blue"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-pink"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-gold"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-red"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-green"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-blue"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-gold"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-pink"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-red"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-green"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-gold"></div></div>
+    </div>
+  </div>
+
+  <!-- CÀNH THÔNG & QUẢ CHÂU TRANG TRÍ 2 GÓC TRÊN MÀN HÌNH -->
+  <div class="corner-garland corner-garland-left" aria-hidden="true">
+    <svg viewBox="0 0 200 160" class="w-16 sm:w-28 md:w-40 h-auto overflow-visible filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+      <path d="M-20 -20 Q40 30 110 35 Q150 40 180 20" fill="none" stroke="#1b4332" stroke-width="12" stroke-linecap="round" />
+      <path d="M-20 -20 Q30 50 85 80 Q120 100 150 95" fill="none" stroke="#2d6a4f" stroke-width="8" stroke-linecap="round" />
+      <path d="M20 15 L35 45 M50 25 L75 55 M80 32 L115 60 M110 38 L145 55 M130 35 L165 38" stroke="#40916c" stroke-width="3" stroke-linecap="round" />
+      <path d="M10 30 L25 65 M40 50 L65 85 M65 65 L95 105 M95 80 L130 108" stroke="#52b788" stroke-width="2.5" stroke-linecap="round" />
+      <path d="M0 5 Q45 25 105 32 Q140 36 175 18" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity="0.9" />
+      <path d="M15 35 Q55 60 90 78 Q115 88 140 85" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" opacity="0.85" />
+      <circle cx="85" cy="45" r="4.5" fill="#dc2626" />
+      <circle cx="92" cy="48" r="4" fill="#b91c1c" />
+      <circle cx="88" cy="53" r="4.2" fill="#ef4444" />
+      <line x1="60" y1="35" x2="60" y2="95" stroke="#f5cf68" stroke-width="1.2" stroke-dasharray="2,2" />
+      <g class="swinging-bauble-left">
+        <circle cx="60" cy="115" r="18" fill="url(#garlandRedBauble)" filter="drop-shadow(0 6px 12px rgba(220,38,38,0.5))" />
+        <rect x="56" y="93" width="8" height="6" fill="#d4af37" rx="1.5" />
+        <path d="M45 115 Q60 125 75 115" fill="none" stroke="#fef08a" stroke-width="1.5" opacity="0.8" />
+        <circle cx="54" cy="108" r="2.5" fill="#ffffff" opacity="0.7" />
+      </g>
+      <line x1="125" y1="40" x2="125" y2="80" stroke="#f5cf68" stroke-width="1" />
+      <g class="swinging-bauble-right">
+        <circle cx="125" cy="92" r="12" fill="url(#garlandGoldBauble)" filter="drop-shadow(0 4px 10px rgba(245,207,104,0.6))" />
+        <rect x="122" y="78" width="6" height="4" fill="#b8860b" rx="1" />
+        <circle cx="121" cy="88" r="1.8" fill="#ffffff" opacity="0.8" />
+      </g>
+    </svg>
+  </div>
+
+  <div class="corner-garland corner-garland-right" aria-hidden="true">
+    <svg viewBox="0 0 200 160" class="w-16 sm:w-28 md:w-40 h-auto overflow-visible filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)] transform -scale-x-100">
+      <path d="M-20 -20 Q40 30 110 35 Q150 40 180 20" fill="none" stroke="#1b4332" stroke-width="12" stroke-linecap="round" />
+      <path d="M-20 -20 Q30 50 85 80 Q120 100 150 95" fill="none" stroke="#2d6a4f" stroke-width="8" stroke-linecap="round" />
+      <path d="M20 15 L35 45 M50 25 L75 55 M80 32 L115 60 M110 38 L145 55 M130 35 L165 38" stroke="#40916c" stroke-width="3" stroke-linecap="round" />
+      <path d="M0 5 Q45 25 105 32 Q140 36 175 18" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity="0.9" />
+      <line x1="75" y1="35" x2="75" y2="85" stroke="#f5cf68" stroke-width="1.2" stroke-dasharray="2,2" />
+      <g class="swinging-bauble-left">
+        <path d="M65 105 C65 92, 85 92, 85 105 L89 116 C91 120, 60 120, 62 116 Z" fill="url(#garlandGoldBauble)" filter="drop-shadow(0 6px 12px rgba(245,207,104,0.5))" />
+        <circle cx="75" cy="120" r="3.5" fill="#f59e0b" />
+        <path d="M75 92 C70 85, 62 88, 73 91 Z" fill="#ef4444" />
+        <path d="M75 92 C80 85, 88 88, 77 91 Z" fill="#ef4444" />
+      </g>
+    </svg>
+  </div>
+
+  <div class="intro-overlay standalone-overlay">
+    <div class="intro-backdrop"></div>
+    <div class="intro-card-container">
+      <div class="intro-card-step active standalone-subpage">
+        <div class="intro-parchment-card intro-subpage-card">
+          <!-- 4 Góc hoa văn viền vàng hoàng gia -->
+          <div class="intro-corner-ornament intro-corner-tl"></div>
+          <div class="intro-corner-ornament intro-corner-tr"></div>
+          <div class="intro-corner-ornament intro-corner-bl"></div>
+          <div class="intro-corner-ornament intro-corner-br"></div>
+
+          <!-- Bông tuyết & Ngôi sao trang trí lấp lánh -->
+          <div class="intro-sparkle intro-sparkle-1">✦</div>
+          <div class="intro-sparkle intro-sparkle-2">❄</div>
+          <div class="intro-sparkle intro-sparkle-3">★</div>
+          <div class="intro-sparkle intro-sparkle-4">❄</div>
+          <div class="intro-sparkle intro-sparkle-5">✦</div>
+          <div class="intro-sparkle intro-sparkle-6">★</div>
+
+          <!-- Tiêu đề trang -->
+          <div class="subpage-header">
+            <div class="intro-date-badge">
+              <span class="intro-badge-deco">✦</span> PHOTOBOOTH GIÁNG SINH <span class="intro-badge-deco">✦</span>
+            </div>
+            <h2 class="intro-script-title subpage-title">Khung Hình Kỷ Niệm</h2>
+            <div class="intro-gold-divider">
+              <span class="intro-divider-line"></span>
+              <span class="intro-divider-star">✦</span>
+              <span class="intro-divider-line"></span>
+            </div>
+            <p class="intro-hub-subtitle">Lưu lại khoảnh khắc ấm áp mùa Noel 📷</p>
+          </div>
+
+          <!-- KHU VỰC PHOTOBOOTH STUDIO (3 CỘT TRÊN DESKTOP: CAMERA | TÙY CHỌN KHUNG | BẢN IN PREVIEW) -->
+          <div class="photobooth-workspace grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 xl:gap-8 items-start justify-center w-full max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto my-0 sm:my-1">
+            
+            <!-- CỘT TRÁI: CAMERA & MÀN HÌNH XEM LẠI ẢNH (5 CỘT TRÊN DESKTOP) -->
+            <div class="photobooth-studio-card lg:col-span-5 flex flex-col items-center w-full max-w-[360px] sm:max-w-[420px] lg:max-w-none mx-auto">
+              
+              <!-- THANH TIẾN TRÌNH 6 ẢNH [1] [2] [3] [4] [5] [6] -->
+              <div class="w-full mb-2 sm:mb-3 px-1">
+                <div class="flex items-center justify-between mb-1.5 sm:mb-2">
+                  <div class="flex items-center gap-1.5">
+                    <span id="pb-step-counter" class="text-xs sm:text-sm font-bold text-amber-200 uppercase tracking-wide">
+                      Ảnh 1/6
+                    </span>
+                    <span id="pb-step-badge" class="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/30 font-medium">
+                      Đang chụp
+                    </span>
+                  </div>
+                  <span id="pb-step-hint" class="text-[10.5px] sm:text-[11px] text-amber-100/70 italic">
+                    Tạo dáng thật tươi nhé!
+                  </span>
+                </div>
+
+                <!-- 6 ô thumbnail tiến trình -->
+                <div class="grid grid-cols-6 gap-1.5 w-full" id="pb-progress-bar">
+                  <div class="pb-thumb-slot active" data-slot="0" title="Ảnh 1">
+                    <span class="slot-number">1</span>
+                    <img class="slot-thumb-img hidden" alt="Ảnh 1">
+                    <div class="slot-check hidden"><i class="fa-solid fa-check"></i></div>
+                  </div>
+                  <div class="pb-thumb-slot" data-slot="1" title="Ảnh 2">
+                    <span class="slot-number">2</span>
+                    <img class="slot-thumb-img hidden" alt="Ảnh 2">
+                    <div class="slot-check hidden"><i class="fa-solid fa-check"></i></div>
+                  </div>
+                  <div class="pb-thumb-slot" data-slot="2" title="Ảnh 3">
+                    <span class="slot-number">3</span>
+                    <img class="slot-thumb-img hidden" alt="Ảnh 3">
+                    <div class="slot-check hidden"><i class="fa-solid fa-check"></i></div>
+                  </div>
+                  <div class="pb-thumb-slot" data-slot="3" title="Ảnh 4">
+                    <span class="slot-number">4</span>
+                    <img class="slot-thumb-img hidden" alt="Ảnh 4">
+                    <div class="slot-check hidden"><i class="fa-solid fa-check"></i></div>
+                  </div>
+                  <div class="pb-thumb-slot" data-slot="4" title="Ảnh 5">
+                    <span class="slot-number">5</span>
+                    <img class="slot-thumb-img hidden" alt="Ảnh 5">
+                    <div class="slot-check hidden"><i class="fa-solid fa-check"></i></div>
+                  </div>
+                  <div class="pb-thumb-slot" data-slot="5" title="Ảnh 6">
+                    <span class="slot-number">6</span>
+                    <img class="slot-thumb-img hidden" alt="Ảnh 6">
+                    <div class="slot-check hidden"><i class="fa-solid fa-check"></i></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- VIEWPORT: CAMERA / XEM LẠI ẢNH -->
+              <div id="photobooth-viewport" class="photobooth-viewport layout-6 relative bg-[#140206] rounded-xl border-2 border-amber-400/40 shadow-2xl overflow-hidden flex items-center justify-center">
+                <!-- Video Stream (Camera) -->
+                <video id="photobooth-video" autoplay playsinline muted class="w-full h-full object-cover hidden -scale-x-100"></video>
+                
+                <!-- Nút Đổi Camera Trước/Sau (Floating khi mở camera) -->
+                <button id="btn-flip-camera" type="button" class="pb-flip-cam-btn hidden" title="Đảo camera trước / sau (Selfie ↔ Camera sau)">
+                  <i class="fa-solid fa-camera-rotate"></i>
+                  <span class="sr-only">Đổi camera</span>
+                </button>
+
+                <!-- Ảnh vừa chụp để xem lại -->
+                <img id="photobooth-review-img" class="w-full h-full object-cover hidden" alt="Ảnh vừa chụp">
+
+                <!-- Placeholder khi chưa bật camera -->
+                <div id="photobooth-placeholder" class="flex flex-col items-center justify-center p-3 sm:p-4 lg:p-6 text-center">
+                  <div class="w-11 h-11 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-full bg-amber-400/10 border border-amber-300/30 flex items-center justify-center mb-1.5 sm:mb-2 lg:mb-3 shadow-inner">
+                    <i class="fa-solid fa-camera-retro text-xl sm:text-2xl lg:text-3xl text-amber-300"></i>
+                  </div>
+                  <h4 id="pb-placeholder-title" class="text-xs sm:text-sm lg:text-base font-bold text-amber-200 mb-0.5 sm:mb-1">Photobooth Giáng Sinh 6 Ô</h4>
+                  <p id="pb-placeholder-desc" class="text-[11px] sm:text-xs lg:text-[13px] text-amber-100/75 max-w-[240px] lg:max-w-[300px] leading-relaxed">
+                    Bấm "Mở Camera" hoặc "Tải ảnh từ máy" để chụp lần lượt 6 khoảnh khắc kỷ niệm đáng yêu!
+                  </p>
+                </div>
+
+                <!-- Đếm ngược Countdown 3, 2, 1 -->
+                <div id="photobooth-countdown-overlay" class="absolute inset-0 z-30 flex flex-col items-center justify-center bg-black/55 backdrop-blur-[2px] hidden cursor-pointer select-none">
+                  <span id="photobooth-countdown-num" class="countdown-number">3</span>
+                  <button id="btn-countdown-snap-now" class="photobooth-btn-countdown-instant mt-3.5" type="button" title="Bỏ qua đếm ngược và chụp ngay">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span>Chụp luôn</span>
+                  </button>
+                  <span class="text-[10px] text-amber-200/80 mt-1.5 italic pointer-events-none">Bấm vào đây để chụp ngay lập tức</span>
+                </div>
+
+                <!-- Chớp flash khi chụp -->
+                <div id="photobooth-flash" class="camera-flash hidden"></div>
+
+                <!-- Canvas chụp frame ẩn -->
+                <canvas id="photobooth-capture-canvas" class="hidden"></canvas>
+              </div>
+
+              <!-- THANH CHỌN BỘ LỌC MÀU & NÂNG TÔNG DA (CHRISTMAS FILTERS) -->
+              <div id="pb-filter-bar" class="pb-filter-bar w-full mt-2 sm:mt-2.5 px-0.5">
+                <div class="flex items-center justify-between w-full mb-1.5 px-0.5">
+                  <span class="text-xs font-bold text-amber-300 flex items-center gap-1.5">
+                    <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i>
+                    <span>Bộ lọc màu</span>
+                  </span>
+                  <span id="pb-current-filter-name" class="text-[10.5px] text-amber-200 font-semibold bg-amber-400/15 px-2 py-0.5 rounded-full border border-amber-400/30">
+                    🌸 Trắng hồng
+                  </span>
+                </div>
+                <div class="pb-filter-pills" id="pb-filter-pills">
+                  <button type="button" class="pb-filter-pill active" data-filter="rosy" title="Nâng tông da trắng hồng rạng rỡ (Khuyên dùng)">
+                    <span class="filter-emoji">🌸</span>
+                    <span class="filter-label">Trắng hồng</span>
+                  </button>
+                  <button type="button" class="pb-filter-pill" data-filter="warm" title="Màu vàng kem ấm cúng bên ánh nến Noel">
+                    <span class="filter-emoji">🎄</span>
+                    <span class="filter-label">Ấm áp</span>
+                  </button>
+                  <button type="button" class="pb-filter-pill" data-filter="snow" title="Tông tuyết trắng sáng trong veo">
+                    <span class="filter-emoji">❄️</span>
+                    <span class="filter-label">Băng tuyết</span>
+                  </button>
+                  <button type="button" class="pb-filter-pill" data-filter="vintage" title="Màu phim hoài niệm thập niên 90">
+                    <span class="filter-emoji">🎞️</span>
+                    <span class="filter-label">Cổ điển</span>
+                  </button>
+                  <button type="button" class="pb-filter-pill" data-filter="bw" title="Đen trắng nghệ thuật sang trọng">
+                    <span class="filter-emoji">🖤</span>
+                    <span class="filter-label">Trắng đen</span>
+                  </button>
+                  <button type="button" class="pb-filter-pill" data-filter="none" title="Ảnh mộc gốc tự nhiên từ camera">
+                    <span class="filter-emoji">✨</span>
+                    <span class="filter-label">Tự nhiên</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- CỘT GIỮA: TÙY CHỌN KHUNG, MẸO CHỤP & BẢNG ĐIỀU KHIỂN (3 CỘT TRÊN DESKTOP) -->
+            <div class="pb-center-panel lg:col-span-3 flex flex-col items-center w-full max-w-[340px] lg:max-w-none mx-auto gap-2.5 sm:gap-3">
+              <!-- BỘ CHỌN KHUNG PHOTOBOOTH (BỐ CỤC & MÀU SẮC) -->
+              <div class="pb-frame-selector-wrapper w-full order-2 lg:order-1">
+                <div class="pb-frame-selector-card">
+                  <!-- Chọn kiểu bố cục: 6 Ô, 3 Ô, 2 Ô -->
+                  <div class="w-full">
+                    <div class="pb-selector-section-header">
+                      <span class="pb-selector-section-title">
+                        <i class="fa-solid fa-shapes text-amber-300"></i> Bố cục
+                      </span>
+                      <span class="pb-selector-section-hint">Chọn số ô ảnh</span>
+                    </div>
+                    <div class="pb-layout-options">
+                      <button type="button" class="pb-layout-opt-btn active" data-layout="6" title="Khung 6 Ô ảnh (2 cột × 3 hàng)">
+                        <i class="fa-solid fa-table-cells text-[10px]"></i>
+                        <span>Khung 6 Ô</span>
+                      </button>
+                      <button type="button" class="pb-layout-opt-btn" data-layout="3" title="Khung 3 Ô ảnh ngang (1 cột × 3 hàng)">
+                        <i class="fa-solid fa-bars text-[10px]"></i>
+                        <span>Khung 3 Ô</span>
+                      </button>
+                      <button type="button" class="pb-layout-opt-btn" data-layout="2" title="Khung 2 Ô ảnh lớn (1 cột × 2 hàng)">
+                        <i class="fa-solid fa-table-rows text-[10px]"></i>
+                        <span>Khung 2 Ô</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Chọn màu sắc: Đỏ Noel, Xanh Thông, Xanh Đêm, Xanh Tuyết -->
+                  <div class="w-full">
+                    <div class="pb-selector-section-header">
+                      <span class="pb-selector-section-title">
+                        <i class="fa-solid fa-palette text-amber-300"></i> Màu khung
+                      </span>
+                      <span class="pb-selector-section-hint">Chủ đề Noel</span>
+                    </div>
+                    <div class="pb-frame-options">
+                      <button type="button" class="pb-frame-opt-btn active" data-frame="red" title="Khung Đỏ Noel ấm áp">
+                        <span class="pb-frame-dot bg-[#8c1d2f]"></span>
+                        <span>Đỏ Noel</span>
+                      </button>
+                      <button type="button" class="pb-frame-opt-btn" data-frame="green" title="Khung Xanh Rừng Thông">
+                        <span class="pb-frame-dot bg-[#1b4332]"></span>
+                        <span>Xanh Thông</span>
+                      </button>
+                      <button type="button" class="pb-frame-opt-btn" data-frame="blue" title="Khung Xanh Đêm Sao">
+                        <span class="pb-frame-dot bg-[#1a2e4c]"></span>
+                        <span>Xanh Đêm</span>
+                      </button>
+                      <button type="button" class="pb-frame-opt-btn" data-frame="snow" title="Khung Xanh Tuyết Băng Giá">
+                        <span class="pb-frame-dot bg-[#8cbcd0]"></span>
+                        <span>Xanh Tuyết</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- THẺ MẸO CHỤP ẢNH ĐẸP (CHỈ HIỂN THỊ TRÊN DESKTOP) -->
+              <div class="pb-tips-card hidden lg:flex flex-col gap-2.5 w-full p-3.5 rounded-xl bg-[rgba(22,3,8,0.85)] border border-amber-400/30 text-amber-200/80 shadow-lg backdrop-blur-sm order-3 lg:order-2">
+                <div class="flex items-center gap-2 font-bold text-amber-300 text-xs">
+                  <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i>
+                  <span>Mẹo Chụp Ảnh Đẹp</span>
+                </div>
+                <ul class="space-y-1.5 text-[11px] text-amber-100/75 leading-relaxed list-disc list-inside">
+                  <li>Canh góc mặt ở chính giữa khung camera để ảnh tự nhiên nhất.</li>
+                  <li>Dùng tính năng hẹn giờ 3s, 5s để sẵn sàng tạo dáng thật rạng rỡ.</li>
+                  <li>Sau khi chụp, có thể bấm vào từng ô trên khung bên phải để chụp lại ô đó.</li>
+                </ul>
+              </div>
+
+              <!-- CÁC BẢNG NÚT ĐIỀU KHIỂN (PHẦN Ở ẢNH 1: HẸN GIỜ + CHỤP ẢNH + TẢI ẢNH, ĐẶT DƯỚI MẸO CHỤP ẢNH ĐẸP) -->
+              <div class="photobooth-controls-panel w-full order-1 lg:order-3 flex flex-col items-center justify-center mt-1 sm:mt-1.5">
+                
+                <!-- Bảng 1: TRẠNG THÁI BAN ĐẦU (Chưa mở camera) -->
+                <div id="controls-idle" class="flex flex-col items-center justify-center gap-2 lg:gap-2.5 w-full">
+                  <button id="btn-start-camera" class="photobooth-btn photobooth-btn-gold text-xs sm:text-sm lg:text-[14px] px-7 lg:px-8 py-2.5 lg:py-2.5 shadow-xl w-full max-w-[220px] lg:max-w-[240px]" type="button">
+                    <i class="fa-solid fa-camera text-xs lg:text-sm"></i>
+                    <span>Mở Camera</span>
+                  </button>
+                  <label for="input-upload-photo" class="photobooth-btn photobooth-btn-upload photobooth-btn-subtle text-xs sm:text-sm lg:text-[13px] px-5 lg:px-6 py-2 w-full max-w-[220px] lg:max-w-[240px] cursor-pointer">
+                    <i class="fa-solid fa-image text-xs lg:text-sm"></i>
+                    <span>Tải ảnh từ máy</span>
+                  </label>
+                  <input type="file" id="input-upload-photo" accept="image/*" class="hidden" />
+                </div>
+
+                <!-- Bảng 2: TRẠNG THÁI SẴN SÀNG CHỤP (Camera đang chạy - CHÍNH LÀ PHẦN Ở ẢNH 1) -->
+                <div id="controls-camera" class="hidden flex flex-col items-center justify-center gap-2 w-full">
+                  <!-- Bộ chọn thời gian hẹn giờ chụp -->
+                  <div class="photobooth-timer-selector flex items-center justify-center gap-2 mb-0.5">
+                    <span class="text-xs text-amber-200/90 font-semibold flex items-center gap-1">
+                      <i class="fa-regular fa-clock text-[11px] text-amber-300"></i> Hẹn giờ:
+                    </span>
+                    <div class="pb-timer-pills">
+                      <button type="button" class="pb-timer-btn" data-time="0" title="Chụp ngay lập tức (không đếm ngược)">0s</button>
+                      <button type="button" class="pb-timer-btn active" data-time="3" title="Đếm ngược 3 giây">3s</button>
+                      <button type="button" class="pb-timer-btn" data-time="5" title="Đếm ngược 5 giây">5s</button>
+                      <button type="button" class="pb-timer-btn" data-time="10" title="Đếm ngược 10 giây">10s</button>
+                    </div>
+                  </div>
+
+                  <!-- Các nút chụp ảnh: Nút Chụp chính ở trên, Nút Tải ảnh ở dưới -->
+                  <button id="btn-snap-photo" class="photobooth-btn photobooth-btn-red text-sm px-8 py-2.5 shadow-xl w-full max-w-[220px]" type="button">
+                    <i class="fa-solid fa-camera text-sm"></i>
+                    <span id="btn-snap-label">Chụp ảnh (3s)</span>
+                  </button>
+                  <span class="text-[10px] text-amber-200/60 hidden lg:inline-block italic -mt-1 pointer-events-none">
+                    Nhấn phím [Space] để chụp
+                  </span>
+
+                  <label for="input-upload-photo-slot" class="photobooth-btn photobooth-btn-upload photobooth-btn-subtle cursor-pointer text-xs py-2 px-5" title="Hoặc tải ảnh từ máy cho ô này">
+                    <i class="fa-solid fa-upload text-xs"></i>
+                    <span>Tải ảnh từ máy</span>
+                  </label>
+                  <input type="file" id="input-upload-photo-slot" accept="image/*" class="hidden" />
+                </div>
+
+                <!-- Bảng 3: TRẠNG THÁI XEM LẠI ẢNH (Sau khi vừa chụp xong ô X) -->
+                <div id="controls-review" class="hidden flex flex-col items-center gap-2 w-full">
+                  <p class="text-xs text-amber-200/90 font-medium text-center">Bạn có ưng ý với ảnh này không?</p>
+                  <div class="flex items-center justify-center gap-2 sm:gap-2.5 w-full flex-wrap">
+                    <button id="btn-retake-photo" class="photobooth-btn photobooth-btn-upload px-3.5 py-2 text-xs font-semibold" type="button">
+                      <i class="fa-solid fa-rotate-right text-xs"></i>
+                      <span>Chụp lại</span>
+                    </button>
+                    <button id="btn-crop-current-photo" class="photobooth-btn photobooth-btn-upload px-3.5 py-2 text-xs font-semibold" type="button" title="Cắt lại hoặc căn chỉnh ảnh này">
+                      <i class="fa-solid fa-crop-simple text-xs"></i>
+                      <span>Cắt ảnh</span>
+                    </button>
+                    <button id="btn-accept-photo" class="photobooth-btn photobooth-btn-gold px-4 py-2 text-xs font-bold shadow-lg" type="button">
+                      <i class="fa-solid fa-check text-xs"></i>
+                      <span>Dùng ảnh</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Bảng 4: TRẠNG THÁI HOÀN THÀNH 6 ẢNH (FINAL RESULT) -->
+                <div id="controls-completed" class="hidden flex flex-col items-center gap-2.5 w-full">
+                  <div class="text-center">
+                    <p class="text-sm sm:text-base font-bold text-amber-300 drop-shadow flex items-center justify-center gap-1.5">
+                      <span>🎄</span> Ảnh của bạn đã hoàn thành! <span>✨</span>
+                    </p>
+                    <p class="text-xs text-amber-100/80 mt-0.5">Dán sticker trang trí cho khung ảnh của bạn:</p>
+                  </div>
+
+                  <!-- BẢNG CHỌN STICKER NOEL TRANG TRÍ -->
+                  <div id="pb-sticker-drawer" class="pb-sticker-drawer w-full">
+                    <div class="flex items-center justify-between w-full mb-1.5 px-0.5">
+                      <span class="text-xs font-bold text-amber-300 flex items-center gap-1.5">
+                        <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i>
+                        <span>Dán Sticker Noel</span>
+                      </span>
+                      <button id="btn-clear-stickers" type="button" class="text-[10px] text-amber-200/70 hover:text-red-400 underline cursor-pointer">
+                        Xóa hết sticker
+                      </button>
+                    </div>
+                    <div class="pb-sticker-grid" id="pb-sticker-grid">
+                      <button type="button" class="pb-sticker-item" data-sticker="santa_hat" title="Mũ Noel mini">
+                        <img src="assets/images/stickers/santa_hat.png" class="pb-sticker-item-img" alt="Mũ Noel">
+                        <span class="pb-sticker-item-label">Mũ Noel</span>
+                      </button>
+                      <button type="button" class="pb-sticker-item" data-sticker="reindeer_antlers" title="Sừng tuần lộc">
+                        <img src="assets/images/stickers/reindeer_antlers.svg" class="pb-sticker-item-img" alt="Sừng tuần lộc">
+                        <span class="pb-sticker-item-label">Sừng hươu</span>
+                      </button>
+                      <button type="button" class="pb-sticker-item" data-sticker="bow" title="Nơ đỏ nhung">
+                        <img src="assets/images/ornaments/bow.png" class="pb-sticker-item-img" alt="Nơ đỏ">
+                        <span class="pb-sticker-item-label">Nơ đỏ</span>
+                      </button>
+                      <button type="button" class="pb-sticker-item" data-sticker="mistletoe" title="Nhánh tầm gửi quả mọng">
+                        <img src="assets/images/stickers/mistletoe.svg" class="pb-sticker-item-img" alt="Tầm gửi">
+                        <span class="pb-sticker-item-label">Tầm gửi</span>
+                      </button>
+                      <button type="button" class="pb-sticker-item" data-sticker="mini_tree" title="Cây thông mini">
+                        <img src="assets/images/stickers/mini_tree.svg" class="pb-sticker-item-img" alt="Cây thông">
+                        <span class="pb-sticker-item-label">Cây thông</span>
+                      </button>
+                      <button type="button" class="pb-sticker-item" data-sticker="candycane" title="Kẹo gậy Giáng Sinh">
+                        <img src="assets/images/ornaments/candycane.png" class="pb-sticker-item-img" alt="Kẹo gậy">
+                        <span class="pb-sticker-item-label">Kẹo gậy</span>
+                      </button>
+                      <button type="button" class="pb-sticker-item" data-sticker="gingerbread" title="Bánh quy gừng">
+                        <img src="assets/images/ornaments/gingerbread.png" class="pb-sticker-item-img" alt="Bánh gừng">
+                        <span class="pb-sticker-item-label">Bánh gừng</span>
+                      </button>
+                      <button type="button" class="pb-sticker-item" data-sticker="bell" title="Chuông vàng Noel">
+                        <img src="assets/images/ornaments/bell.png" class="pb-sticker-item-img" alt="Chuông vàng">
+                        <span class="pb-sticker-item-label">Chuông vàng</span>
+                      </button>
+                      <button type="button" class="pb-sticker-item" data-sticker="snowflake" title="Bông tuyết trắng">
+                        <img src="assets/images/ornaments/snowflake.png" class="pb-sticker-item-img" alt="Bông tuyết">
+                        <span class="pb-sticker-item-label">Bông tuyết</span>
+                      </button>
+                      <button type="button" class="pb-sticker-item" data-sticker="star_gold" title="Ngôi sao vàng kim">
+                        <img src="assets/images/ornaments/star_gold.png" class="pb-sticker-item-img" alt="Sao vàng">
+                        <span class="pb-sticker-item-label">Sao vàng</span>
+                      </button>
+                      <button type="button" class="pb-sticker-item" data-sticker="gifts" title="Hộp quà Giáng Sinh">
+                        <img src="assets/images/ornaments/gifts.png" class="pb-sticker-item-img" alt="Hộp quà">
+                        <span class="pb-sticker-item-label">Hộp quà</span>
+                      </button>
+                      <button type="button" class="pb-sticker-item" data-sticker="bear_santa" title="Gấu Noel đáng yêu">
+                        <img src="assets/images/ornaments/bear_santa.png" class="pb-sticker-item-img" alt="Gấu Noel">
+                        <span class="pb-sticker-item-label">Gấu Noel</span>
+                      </button>
+                    </div>
+                    <p class="text-[10.5px] text-amber-200/90 text-center mt-2 font-medium">
+                      👆 <strong class="text-amber-300">Bấm chọn sticker</strong> rồi <strong class="text-amber-300">chạm vào ảnh</strong> để dán
+                    </p>
+                    <p class="text-[9.5px] text-amber-100/60 text-center mt-0.5 italic">
+                      Kéo để di chuyển • Kéo góc tròn để xoay & phóng to • Bấm nút (×) để xóa
+                    </p>
+                    <div class="flex items-center justify-center gap-2 mt-2 lg:hidden">
+                      <button id="btn-scroll-to-strip" type="button" class="text-[11px] text-amber-300 bg-amber-400/15 hover:bg-amber-400/25 border border-amber-300/30 rounded-full px-3 py-1 font-semibold transition-all cursor-pointer flex items-center gap-1.5 shadow-sm">
+                        <i class="fa-solid fa-arrow-down text-[10px] text-amber-400"></i>
+                        <span>Xem & căn chỉnh khung ảnh</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- CỘT PHẢI: KHUNG PHOTOBOOTH GIÁNG SINH PREVIEW (4 CỘT TRÊN DESKTOP) -->
+            <div class="photobooth-preview-column lg:col-span-4 flex flex-col items-center w-full max-w-[360px] sm:max-w-[400px] lg:max-w-none mx-auto">
+              <div class="text-center mb-1.5 flex items-center justify-center">
+                <span class="text-xs font-bold text-amber-300 uppercase tracking-widest flex items-center justify-center gap-1">
+                  <span>❄</span> Khung Photobooth <span>❄</span>
+                </span>
+              </div>
+              <span class="text-[11px] text-amber-100/60 block mb-1">Ảnh sẽ xuất hiện vào khung ngay sau khi xác nhận</span>
+
+              <!-- DẢI KHUNG PHOTOBOOTH 6 Ô (Tỷ lệ chuẩn 576 / 1024) -->
+              <div id="photobooth-strip-container" class="photobooth-strip-container">
+                <!-- 6 Ô ảnh nằm dưới lớp khung -->
+                <div class="photobooth-slot pb-slot-0" data-index="0" title="Bấm để chụp lại ảnh 1">
+                  <img id="pb-slot-img-0" class="photobooth-slot-img hidden" alt="Ô 1">
+                  <div class="photobooth-slot-empty">
+                    <i class="fa-solid fa-camera text-xs text-amber-300/40 mb-0.5"></i>
+                    <span>Ô 1</span>
+                  </div>
+                </div>
+
+                <div class="photobooth-slot pb-slot-1" data-index="1" title="Bấm để chụp lại ảnh 2">
+                  <img id="pb-slot-img-1" class="photobooth-slot-img hidden" alt="Ô 2">
+                  <div class="photobooth-slot-empty">
+                    <i class="fa-solid fa-camera text-xs text-amber-300/40 mb-0.5"></i>
+                    <span>Ô 2</span>
+                  </div>
+                </div>
+
+                <div class="photobooth-slot pb-slot-2" data-index="2" title="Bấm để chụp lại ảnh 3">
+                  <img id="pb-slot-img-2" class="photobooth-slot-img hidden" alt="Ô 3">
+                  <div class="photobooth-slot-empty">
+                    <i class="fa-solid fa-camera text-xs text-amber-300/40 mb-0.5"></i>
+                    <span>Ô 3</span>
+                  </div>
+                </div>
+
+                <div class="photobooth-slot pb-slot-3" data-index="3" title="Bấm để chụp lại ảnh 4">
+                  <img id="pb-slot-img-3" class="photobooth-slot-img hidden" alt="Ô 4">
+                  <div class="photobooth-slot-empty">
+                    <i class="fa-solid fa-camera text-xs text-amber-300/40 mb-0.5"></i>
+                    <span>Ô 4</span>
+                  </div>
+                </div>
+
+                <div class="photobooth-slot pb-slot-4" data-index="4" title="Bấm để chụp lại ảnh 5">
+                  <img id="pb-slot-img-4" class="photobooth-slot-img hidden" alt="Ô 5">
+                  <div class="photobooth-slot-empty">
+                    <i class="fa-solid fa-camera text-xs text-amber-300/40 mb-0.5"></i>
+                    <span>Ô 5</span>
+                  </div>
+                </div>
+
+                <div class="photobooth-slot pb-slot-5" data-index="5" title="Bấm để chụp lại ảnh 6">
+                  <img id="pb-slot-img-5" class="photobooth-slot-img hidden" alt="Ô 6">
+                  <div class="photobooth-slot-empty">
+                    <i class="fa-solid fa-camera text-xs text-amber-300/40 mb-0.5"></i>
+                    <span>Ô 6</span>
+                  </div>
+                </div>
+
+                <!-- Lớp khung ảnh Giáng Sinh nguyên bản đè lên trên cùng -->
+                <img id="photobooth-frame-overlay" src="assets/frame_6_red.png" alt="Khung Photobooth Giáng Sinh" class="photobooth-frame-overlay" draggable="false">
+
+                <!-- LỚP DÁN STICKER TRANG TRÍ TRÊN KHUNG -->
+                <div id="photobooth-stickers-layer" class="photobooth-stickers-layer"></div>
+              </div>
+
+              <!-- CỤM NÚT HÀNH ĐỘNG KHI HOÀN THÀNH (ĐẶT NGAY DƯỚI KHUNG PHOTOBOOTH) -->
+              <div id="pb-final-actions" class="pb-final-actions hidden flex flex-col items-center justify-center gap-2 sm:gap-2.5 w-full mt-3 sm:mt-3.5">
+                <button id="btn-retake-all" class="photobooth-btn photobooth-btn-upload text-xs py-2 px-4 font-semibold w-full max-w-[240px] flex items-center justify-center gap-2" type="button">
+                  <i class="fa-solid fa-rotate-right text-xs"></i>
+                  <span>Chụp lại từ đầu</span>
+                </button>
+                <button id="btn-download-final" class="photobooth-btn photobooth-btn-gold text-xs sm:text-sm py-2.5 px-5 font-bold shadow-xl active:scale-95 transition-all w-full max-w-[240px] flex items-center justify-center gap-2" type="button" title="Tải ảnh Photobooth với mẫu khung đã chọn (độ nét cao 2K)">
+                  <i class="fa-solid fa-download text-xs sm:text-sm"></i>
+                  <span>Tải ảnh Photobooth (HD)</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Thanh điều hướng chân trang: Quay về Menu 4 lựa chọn -->
+          <div class="subpage-nav-bar">
+            <a href="index.html?step=hub" class="subpage-back-btn">
+              <i class="fa-solid fa-arrow-left text-xs"></i>
+              <span>Chọn món quà khác</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- MODAL CẮT ẢNH THEO TỈ LỆ KHUNG (CROPPER CHO PHOTOBOOTH) -->
+  <div id="image-crop-modal"
+    class="fixed inset-0 z-[130] flex items-center justify-center p-3 bg-black/85 backdrop-blur-md hidden transition-all duration-300"
+    role="dialog" aria-modal="true">
+    <div
+      class="relative max-w-md w-full max-h-[95vh] flex flex-col items-center bg-[#18040a] border border-amber-300/40 rounded-2xl shadow-2xl overflow-hidden p-4 sm:p-5">
+
+      <!-- Tiêu đề modal -->
+      <div class="flex items-center justify-between w-full pb-2 mb-2 border-b border-amber-300/20">
+        <h3 id="crop-modal-title" class="font-christmas text-base sm:text-lg text-amber-200 font-bold flex items-center gap-1.5">
+          <span>✂️</span> <span>Cắt & Căn Chỉnh Ảnh</span>
+        </h3>
+        <button id="btn-close-crop-modal"
+          class="text-white/60 hover:text-white p-1 text-xl cursor-pointer transition-colors" title="Đóng">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <p id="crop-modal-desc" class="text-xs text-amber-100/75 text-center mb-2.5">
+        Kéo, phóng to hoặc xoay ảnh để căn chỉnh vừa vặn vào khung nhé!
+      </p>
+
+      <!-- Khung hiển thị Cropper -->
+      <div
+        class="w-full h-[45vh] sm:h-[48vh] max-h-[350px] bg-black/70 rounded-xl overflow-hidden border border-amber-200/25 flex items-center justify-center relative">
+        <img id="crop-target-img" src="" alt="Ảnh cần cắt" class="max-w-full block" style="max-height: 100%;">
+      </div>
+
+      <!-- Thanh công cụ xoay & zoom -->
+      <div class="flex items-center justify-center gap-2.5 sm:gap-3 my-3 w-full">
+        <button id="btn-crop-zoom-out" type="button" class="crop-tool-btn" title="Thu nhỏ">
+          <i class="fa-solid fa-magnifying-glass-minus"></i>
+        </button>
+        <button id="btn-crop-zoom-in" type="button" class="crop-tool-btn" title="Phóng to">
+          <i class="fa-solid fa-magnifying-glass-plus"></i>
+        </button>
+        <button id="btn-crop-rotate-left" type="button" class="crop-tool-btn" title="Xoay trái 90°">
+          <i class="fa-solid fa-rotate-left"></i>
+        </button>
+        <button id="btn-crop-rotate-right" type="button" class="crop-tool-btn" title="Xoay phải 90°">
+          <i class="fa-solid fa-rotate-right"></i>
+        </button>
+        <button id="btn-crop-reset" type="button" class="crop-tool-btn" title="Đặt lại vị trí ban đầu">
+          <i class="fa-solid fa-arrows-rotate"></i>
+        </button>
+      </div>
+
+      <!-- Nút hành động -->
+      <div class="flex items-center justify-end gap-2.5 sm:gap-3 w-full pt-2 border-t border-amber-300/20">
+        <button id="btn-crop-cancel" type="button"
+          class="px-4 py-1.5 sm:py-2 rounded-full border border-white/20 text-white/80 hover:bg-white/10 text-xs sm:text-sm font-semibold transition-all">
+          Hủy bỏ
+        </button>
+        <button id="btn-crop-apply" type="button"
+          class="festive-btn-gold px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-lg active:scale-95 transition-all">
+          <i class="fa-solid fa-check"></i> Cắt & Áp dụng
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL XEM LẠI & QUẢN LÝ / XÓA ẢNH TỪNG Ô -->
+  <div id="pb-photo-inspect-modal"
+    class="fixed inset-0 z-[120] flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md hidden transition-all duration-300"
+    role="dialog" aria-modal="true">
+    <div
+      class="relative max-w-sm sm:max-w-md w-full max-h-[92vh] flex flex-col items-center bg-[#1c0309] border border-amber-300/40 rounded-2xl shadow-2xl overflow-hidden p-4 sm:p-5">
+      
+      <!-- Tiêu đề modal -->
+      <div class="flex items-center justify-between w-full pb-2 mb-2 border-b border-amber-300/20">
+        <h3 id="pb-inspect-title" class="font-christmas text-lg sm:text-xl text-amber-200 font-bold flex items-center gap-2">
+          <span>🎄</span> <span>Xem Lại Ảnh Ô 1</span>
+        </h3>
+        <button id="btn-close-inspect-modal" class="text-white/60 hover:text-white p-1 text-xl cursor-pointer transition-colors" title="Đóng">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <p class="text-xs text-amber-100/75 text-center mb-2.5">
+        Xem chi tiết ảnh của bạn. Nếu chưa ưng ý, bạn có thể xóa ảnh này để chụp lại!
+      </p>
+
+      <!-- Khung hiển thị ảnh phóng to -->
+      <div class="w-full max-h-[50vh] sm:max-h-[54vh] bg-black/70 rounded-xl overflow-hidden border border-amber-300/30 flex items-center justify-center relative p-1 shadow-inner">
+        <img id="pb-inspect-img" src="" alt="Ảnh phóng to" class="max-w-full max-h-[48vh] sm:max-h-[52vh] object-contain rounded-lg shadow-md block">
+      </div>
+
+      <!-- Các nút thao tác -->
+      <div class="flex items-center justify-center gap-2 sm:gap-2.5 w-full mt-3.5 pt-2.5 border-t border-amber-300/20 flex-wrap">
+        <!-- Nút Xóa ảnh -->
+        <button id="btn-inspect-delete" type="button"
+          class="photobooth-btn photobooth-btn-red text-xs sm:text-sm px-4 py-2 font-bold shadow-lg active:scale-95 transition-all"
+          title="Xóa ảnh khỏi ô này">
+          <i class="fa-solid fa-trash-can text-xs"></i>
+          <span>Xóa ảnh này</span>
+        </button>
+
+        <!-- Nút Chụp lại ô này -->
+        <button id="btn-inspect-retake" type="button"
+          class="photobooth-btn photobooth-btn-gold text-xs sm:text-sm px-4 py-2 font-bold shadow-lg active:scale-95 transition-all"
+          title="Xóa và mở camera để chụp lại ô này ngay">
+          <i class="fa-solid fa-camera-rotate text-xs"></i>
+          <span>Chụp lại</span>
+        </button>
+
+        <!-- Nút Giữ ảnh / Đóng -->
+        <button id="btn-inspect-keep" type="button"
+          class="photobooth-btn photobooth-btn-subtle text-xs sm:text-sm px-3.5 py-2 font-semibold transition-all"
+          title="Giữ nguyên ảnh này">
+          <i class="fa-solid fa-check text-xs"></i>
+          <span>Giữ ảnh</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT -->
+  <script src="js/common.js"></script>
+  <script src="js/photobooth.js?v=13.0"></script>
+</body>
+
+</html>

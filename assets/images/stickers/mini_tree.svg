@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 160" width="140" height="160">
+  <defs>
+    <linearGradient id="treeGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2d6a4f" />
+      <stop offset="100%" stop-color="#1b4332" />
+    </linearGradient>
+    <linearGradient id="treeGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#40916c" />
+      <stop offset="100%" stop-color="#2d6a4f" />
+    </linearGradient>
+    <linearGradient id="trunkGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#78350f" />
+      <stop offset="100%" stop-color="#451a03" />
+    </linearGradient>
+    <filter id="treeShadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-opacity="0.35" />
+    </filter>
+  </defs>
+
+  <!-- Gốc cây -->
+  <rect x="62" y="132" width="16" height="22" rx="3" fill="url(#trunkGrad)" filter="url(#treeShadow)" />
+
+  <!-- Tầng lá dưới cùng -->
+  <path d="M 22 135 L 70 85 L 118 135 C 105 130, 85 138, 70 132 C 55 138, 35 130, 22 135 Z" 
+        fill="url(#treeGrad1)" filter="url(#treeShadow)" />
+  <path d="M 28 133 Q 70 120 112 133" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.8" />
+
+  <!-- Tầng lá giữa -->
+  <path d="M 32 105 L 70 60 L 108 105 C 98 100, 82 108, 70 102 C 58 108, 42 100, 32 105 Z" 
+        fill="url(#treeGrad2)" filter="url(#treeShadow)" />
+  <path d="M 38 103 Q 70 92 102 103" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" opacity="0.8" />
+
+  <!-- Tầng lá trên cùng -->
+  <path d="M 44 75 L 70 32 L 96 75 C 88 71, 78 77, 70 73 C 62 77, 52 71, 44 75 Z" 
+        fill="url(#treeGrad1)" filter="url(#treeShadow)" />
+  <path d="M 48 73 Q 70 65 92 73" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" opacity="0.8" />
+
+  <!-- Quả châu trang trí -->
+  <circle cx="50" cy="120" r="5" fill="#ef4444" filter="url(#treeShadow)" />
+  <circle cx="90" cy="122" r="5" fill="#facc15" filter="url(#treeShadow)" />
+  <circle cx="70" cy="112" r="4.5" fill="#3b82f6" filter="url(#treeShadow)" />
+  <circle cx="56" cy="92" r="4.5" fill="#f59e0b" filter="url(#treeShadow)" />
+  <circle cx="84" cy="90" r="4.5" fill="#ef4444" filter="url(#treeShadow)" />
+  <circle cx="70" cy="65" r="4" fill="#facc15" filter="url(#treeShadow)" />
+
+  <!-- Ngôi sao vàng đỉnh cây -->
+  <polygon points="70,14 74,25 86,25 76,32 80,43 70,36 60,43 64,32 54,25 66,25" 
+           fill="#ffd700" stroke="#f59e0b" stroke-width="1.2" filter="url(#treeShadow)" />
+</svg>

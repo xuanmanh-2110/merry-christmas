@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="vi" class="h-full thiep-html">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Thiệp Giáng Sinh 💌 - Merry Christmas</title>
+
+  <!-- GOOGLE FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@600;700;800&family=Dancing+Script:wght@400;500;600;700&family=Great+Vibes&family=Mountains+of+Christmas:wght@700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Quicksand:wght@500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- TAILWIND CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- FONT AWESOME ICONS CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- CANVAS-CONFETTI CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+  <!-- CROPPER.JS (Cắt ảnh vuông 1:1 cho khung Polaroid) -->
+  <link rel="stylesheet" href="css/cropper.min.css">
+  <script src="js/cropper.min.js"></script>
+
+  <!-- HTML2CANVAS (Xuất ảnh thiệp chất lượng cao) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <!-- SELF-CONTAINED FONTS CHO XUẤT ẢNH & HIỂN THỊ CHÍNH XÁC -->
+  <link rel="stylesheet" href="css/embedded-fonts.css?v=10.0">
+
+  <!-- CUSTOM STYLES -->
+  <link rel="stylesheet" href="css/style.css?v=13.0">
+</head>
+
+<body class="thiep-page bg-[#040914] text-white flex flex-col h-screen h-[100dvh] overflow-hidden select-none">
+
+  <!-- 1. BẦU TRỜ ĐÊM & CỰC QUANG (AURORA BOREALIS) -->
+  <div class="night-sky">
+
+
+    <div class="aurora-layer"></div>
+    <div class="aurora-layer-2"></div>
+    <div class="aurora-layer-3"></div>
+    <div class="stars-overlay"></div>
+  </div>
+
+  <!-- 2. CANVAS TUYẾT RƠI 3D VẬT LÝ & VỆT SAO BỤI THẦN TIÊN -->
+  <canvas id="snow-canvas"></canvas>
+  <canvas id="magic-trail-canvas" class="magic-trail-canvas" aria-hidden="true"></canvas>
+
+  <!-- 3. DÂY ĐÈN LED GIÁNG SINH TREO MÀN HÌNH (LIỀN MẠCH, KHÔNG VẾT CẮT) -->
+  <div class="fairy-lights-container" aria-hidden="true">
+    <div class="fairy-lights-track">
+      <div class="fairy-light-unit">
+        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
+          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        <div class="bulb-socket-cap"></div>
+        <div class="bulb-item bulb-gold"></div>
+      </div>
+      <div class="fairy-light-unit">
+        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
+          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        <div class="bulb-socket-cap"></div>
+        <div class="bulb-item bulb-red"></div>
+      </div>
+      <div class="fairy-light-unit">
+        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
+          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        <div class="bulb-socket-cap"></div>
+        <div class="bulb-item bulb-green"></div>
+      </div>
+      <div class="fairy-light-unit">
+        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
+          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        <div class="bulb-socket-cap"></div>
+        <div class="bulb-item bulb-blue"></div>
+      </div>
+      <div class="fairy-light-unit">
+        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
+          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        <div class="bulb-socket-cap"></div>
+        <div class="bulb-item bulb-pink"></div>
+      </div>
+      <div class="fairy-light-unit">
+        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
+          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        <div class="bulb-socket-cap"></div>
+        <div class="bulb-item bulb-gold"></div>
+      </div>
+      <div class="fairy-light-unit">
+        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
+          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        <div class="bulb-socket-cap"></div>
+        <div class="bulb-item bulb-red"></div>
+      </div>
+      <div class="fairy-light-unit">
+        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
+          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        <div class="bulb-socket-cap"></div>
+        <div class="bulb-item bulb-green"></div>
+      </div>
+      <div class="fairy-light-unit">
+        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
+          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        <div class="bulb-socket-cap"></div>
+        <div class="bulb-item bulb-blue"></div>
+      </div>
+      <div class="fairy-light-unit">
+        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
+          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        <div class="bulb-socket-cap"></div>
+        <div class="bulb-item bulb-gold"></div>
+      </div>
+      <div class="fairy-light-unit">
+        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
+          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        <div class="bulb-socket-cap"></div>
+        <div class="bulb-item bulb-pink"></div>
+      </div>
+      <div class="fairy-light-unit">
+        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
+          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        <div class="bulb-socket-cap"></div>
+        <div class="bulb-item bulb-red"></div>
+      </div>
+      <div class="fairy-light-unit">
+        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
+          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        <div class="bulb-socket-cap"></div>
+        <div class="bulb-item bulb-green"></div>
+      </div>
+      <div class="fairy-light-unit">
+        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
+          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        <div class="bulb-socket-cap"></div>
+        <div class="bulb-item bulb-blue"></div>
+      </div>
+      <div class="fairy-light-unit">
+        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
+          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        <div class="bulb-socket-cap"></div>
+        <div class="bulb-item bulb-gold"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SVG DEFINITIONS TOÀN CỤC CHO CẢNH QUAN GIÁNG SINH -->
+  <svg width="0" height="0" class="absolute pointer-events-none">
+    <defs>
+      <linearGradient id="garlandRedBauble" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#ff6b81" />
+        <stop offset="50%" stop-color="#ee5253" />
+        <stop offset="100%" stop-color="#a51717" />
+      </linearGradient>
+      <linearGradient id="garlandGoldBauble" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#fff9db" />
+        <stop offset="45%" stop-color="#ffd43b" />
+        <stop offset="100%" stop-color="#d97706" />
+      </linearGradient>
+      <radialGradient id="snowballShade" cx="40%" cy="35%" r="60%">
+        <stop offset="0%" stop-color="#ffffff" />
+        <stop offset="70%" stop-color="#f1f5f9" />
+        <stop offset="100%" stop-color="#cbd5e1" />
+      </radialGradient>
+    </defs>
+  </svg>
+
+  <!-- CÀNH THÔNG & QUẢ CHÂU TRANG TRÍ 2 GÓC TRÊN MÀN HÌNH -->
+  <div class="corner-garland corner-garland-left" aria-hidden="true">
+    <svg viewBox="0 0 200 160"
+      class="w-14 sm:w-28 md:w-44 h-auto overflow-visible filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+      <!-- Cành thông xanh mướt góc trái -->
+      <path d="M-20 -20 Q40 30 110 35 Q150 40 180 20" fill="none" stroke="#1b4332" stroke-width="12"
+        stroke-linecap="round" />
+      <path d="M-20 -20 Q30 50 85 80 Q120 100 150 95" fill="none" stroke="#2d6a4f" stroke-width="8"
+        stroke-linecap="round" />
+      <!-- Kim thông tỏa nhánh -->
+      <path d="M20 15 L35 45 M50 25 L75 55 M80 32 L115 60 M110 38 L145 55 M130 35 L165 38" stroke="#40916c"
+        stroke-width="3" stroke-linecap="round" />
+      <path d="M10 30 L25 65 M40 50 L65 85 M65 65 L95 105 M95 80 L130 108" stroke="#52b788" stroke-width="2.5"
+        stroke-linecap="round" />
+      <!-- Tuyết phủ trên cành thông -->
+      <path d="M0 5 Q45 25 105 32 Q140 36 175 18" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round"
+        opacity="0.9" />
+      <path d="M15 35 Q55 60 90 78 Q115 88 140 85" fill="none" stroke="#ffffff" stroke-width="3.5"
+        stroke-linecap="round" opacity="0.85" />
+      <!-- Chùm quả mọng đỏ (Red berries) -->
+      <circle cx="85" cy="45" r="4.5" fill="#dc2626" />
+      <circle cx="92" cy="48" r="4" fill="#b91c1c" />
+      <circle cx="88" cy="53" r="4.2" fill="#ef4444" />
+      <!-- Dây treo quả châu đung đưa -->
+      <line x1="60" y1="35" x2="60" y2="95" stroke="#f5cf68" stroke-width="1.2" stroke-dasharray="2,2" />
+      <!-- Quả châu đỏ đung đưa -->
+      <g class="swinging-bauble-left">
+        <circle cx="60" cy="115" r="18" fill="url(#garlandRedBauble)"
+          filter="drop-shadow(0 6px 12px rgba(220,38,38,0.5))" />
+        <rect x="56" y="93" width="8" height="6" fill="#d4af37" rx="1.5" />
+        <path d="M45 115 Q60 125 75 115" fill="none" stroke="#fef08a" stroke-width="1.5" opacity="0.8" />
+        <circle cx="54" cy="108" r="2.5" fill="#ffffff" opacity="0.7" />
+      </g>
+      <!-- Quả châu vàng nhỏ -->
+      <line x1="125" y1="40" x2="125" y2="80" stroke="#f5cf68" stroke-width="1" />
+      <g class="swinging-bauble-right">
+        <circle cx="125" cy="92" r="12" fill="url(#garlandGoldBauble)"
+          filter="drop-shadow(0 4px 10px rgba(245,207,104,0.6))" />
+        <rect x="122" y="78" width="6" height="4" fill="#b8860b" rx="1" />
+        <circle cx="121" cy="88" r="1.8" fill="#ffffff" opacity="0.8" />
+      </g>
+    </svg>
+  </div>
+
+  <div class="corner-garland corner-garland-right" aria-hidden="true">
+    <svg viewBox="0 0 200 160"
+      class="w-14 sm:w-28 md:w-44 h-auto overflow-visible filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)] transform -scale-x-100">
+      <!-- Cành thông xanh góc phải đối xứng -->
+      <path d="M-20 -20 Q40 30 110 35 Q150 40 180 20" fill="none" stroke="#1b4332" stroke-width="12"
+        stroke-linecap="round" />
+      <path d="M-20 -20 Q30 50 85 80 Q120 100 150 95" fill="none" stroke="#2d6a4f" stroke-width="8"
+        stroke-linecap="round" />
+      <path d="M20 15 L35 45 M50 25 L75 55 M80 32 L115 60 M110 38 L145 55 M130 35 L165 38" stroke="#40916c"
+        stroke-width="3" stroke-linecap="round" />
+      <path d="M0 5 Q45 25 105 32 Q140 36 175 18" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round"
+        opacity="0.9" />
+      <!-- Quả chuông vàng đung đưa góc phải -->
+      <line x1="75" y1="35" x2="75" y2="85" stroke="#f5cf68" stroke-width="1.2" stroke-dasharray="2,2" />
+      <g class="swinging-bauble-left">
+        <path d="M65 105 C65 92, 85 92, 85 105 L89 116 C91 120, 60 120, 62 116 Z" fill="url(#garlandGoldBauble)"
+          filter="drop-shadow(0 6px 12px rgba(245,207,104,0.5))" />
+        <circle cx="75" cy="120" r="3.5" fill="#f59e0b" />
+        <path d="M75 92 C70 85, 62 88, 73 91 Z" fill="#ef4444" />
+        <path d="M75 92 C80 85, 88 88, 77 91 Z" fill="#ef4444" />
+        <circle cx="75" cy="91" r="2" fill="#fecaca" />
+      </g>
+    </svg>
+  </div>
+
+  <!-- 4. CỖ XE TUẦN LỘC SANTA BAY LƯỚT QUA BẦU TRỜ -->
+  <div id="santa-sleigh" class="santa-fly-track" aria-hidden="true">
+    <div class="stardust-tail"></div>
+    <svg viewBox="0 0 495 120" class="w-full h-full overflow-visible"
+      filter="drop-shadow(0 0 10px rgba(255, 215, 0, 0.95))">
+      <defs>
+        <linearGradient id="santaGoldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#fffbeb" />
+          <stop offset="40%" stop-color="#ffd700" />
+          <stop offset="100%" stop-color="#f59e0b" />
+        </linearGradient>
+
+        <g id="reindeer-shape">
+          <path d="M318,22 C315,14 308,8 300,5 C304,9 308,14 310,20 Z" />
+          <path d="M308,12 C302,9 296,8 290,9 C295,11 301,13 305,15 Z" />
+          <path d="M312,16 C314,10 318,6 324,4 C320,8 318,13 316,18 Z" />
+          <path d="M303,7 C302,2 298,0 293,1 C296,4 299,6 301,8 Z" />
+          <path d="M315,22 C312,16 308,11 304,8 C306,12 309,16 311,21 Z" opacity="0.8" />
+          <path d="M308,13 C304,10 299,10 294,11 C298,12 303,14 306,15 Z" opacity="0.8" />
+
+          <path d="M312,23 C307,24 303,26 302,28 C305,28 309,27 313,25 Z" />
+          <path d="M316,21 C322,23 328,26 335,28 C334,31 330,33 324,33 C319,33 316,35 315,38 Z" />
+
+          <path
+            d="M315,36 C314,41 316,46 322,50 C317,52 308,51 300,48 C294,46 290,43 285,42 C277,41 270,42 264,46 C262,44 260,40 263,38 C270,33 280,34 290,36 C298,37 305,33 310,24 C314,28 316,32 315,36 Z" />
+          <path d="M263,39 C258,38 255,35 256,33 C259,34 262,37 264,40 Z" />
+
+          <path d="M320,49 C326,53 335,58 346,62 C350,63 354,63 358,63 C356,64 350,65 344,64 C333,60 324,54 316,50 Z" />
+          <path d="M316,49 C319,54 324,60 330,66 C333,69 337,70 341,69 C339,71 334,71 329,68 C323,62 317,56 312,50 Z"
+            opacity="0.85" />
+
+          <path d="M272,43 C268,49 261,56 254,63 C250,67 245,71 238,75 C242,73 248,68 253,64 C260,57 267,50 274,44 Z" />
+          <path d="M275,44 C271,50 265,58 258,65 C254,69 249,73 243,77 C246,75 251,71 256,66 C262,59 269,51 277,45 Z"
+            opacity="0.85" />
+
+          <circle cx="318" cy="45" r="2.2" fill="#ffd700" stroke="#b45309" stroke-width="0.6" />
+        </g>
+      </defs>
+
+      <!-- DÂY CƯƠNG VÀNG -->
+      <path d="M102,66 Q 200,52 318,51 Q 375,47 428,47" fill="none" stroke="#fef08a" stroke-width="1.3"
+        stroke-dasharray="3,2" opacity="0.95" />
+      <path d="M102,68 Q 200,54 318,53 Q 375,49 428,49" fill="none" stroke="#fef08a" stroke-width="1.1"
+        stroke-dasharray="3,2" opacity="0.8" />
+      <path d="M102,67 Q 180,77 263,79 Q 320,77 373,75" fill="none" stroke="#fef08a" stroke-width="1.3"
+        stroke-dasharray="3,2" opacity="0.92" />
+      <path d="M102,69 Q 180,79 263,81 Q 320,79 373,77" fill="none" stroke="#fef08a" stroke-width="1.1"
+        stroke-dasharray="3,2" opacity="0.75" />
+      <path d="M263,79 L318,51" stroke="#fef08a" stroke-width="0.9" stroke-dasharray="2,2" opacity="0.55" />
+      <path d="M373,75 L428,47" stroke="#fef08a" stroke-width="0.9" stroke-dasharray="2,2" opacity="0.55" />
+
+      <!-- TUẦN LỘC -->
+      <g id="reindeer-3" fill="url(#santaGoldGrad)" transform="translate(0, 6)" opacity="0.95">
+        <use href="#reindeer-shape" />
+      </g>
+      <g id="reindeer-1-rudolph" fill="url(#santaGoldGrad)" transform="translate(110, 2)">
+        <use href="#reindeer-shape" />
+        <circle cx="336" cy="28.5" r="2.8" fill="#ef4444" filter="drop-shadow(0 0 7px #ff0000)" />
+      </g>
+      <g id="reindeer-4" fill="url(#santaGoldGrad)" transform="translate(-55, 34)">
+        <use href="#reindeer-shape" />
+      </g>
+      <g id="reindeer-2" fill="url(#santaGoldGrad)" transform="translate(55, 30)">
+        <use href="#reindeer-shape" />
+      </g>
+
+      <!-- CỖ XE & ÔNG GIÀ NOEL -->
+      <g id="sleigh-ensemble" transform="translate(0, 20)">
+        <g id="sleigh-group" fill="url(#santaGoldGrad)">
+          <path
+            d="M15,68 Q 20,74 40,75 L 120,75 Q 135,75 142,66 Q 146,60 142,56 Q 138,53 134,57 Q 132,62 136,65 L 42,73 Q 26,73 20,67 Z"
+            fill="#ffd700" />
+          <line x1="38" y1="67" x2="38" y2="74" stroke="#ffd700" stroke-width="2.2" stroke-linecap="round" />
+          <line x1="75" y1="67" x2="75" y2="74" stroke="#ffd700" stroke-width="2.2" stroke-linecap="round" />
+          <line x1="108" y1="65" x2="108" y2="74" stroke="#ffd700" stroke-width="2.2" stroke-linecap="round" />
+          <path
+            d="M22,50 C24,42 32,46 36,54 L44,66 Q75,68 110,65 Q122,64 125,52 Q128,42 120,44 Q116,46 117,50 C114,58 95,62 70,62 L42,61 C32,61 24,56 22,50 Z" />
+          <path d="M26,45 Q 35,46 45,55 L 40,65 Q 26,58 26,45 Z" fill="#d97706" opacity="0.6" />
+        </g>
+        <g id="toy-sack" fill="url(#santaGoldGrad)">
+          <path d="M28,48 C24,38 32,28 42,26 C52,24 60,30 63,38 C65,46 62,54 54,58 C44,62 32,58 28,48 Z" />
+          <ellipse cx="44" cy="27" rx="6" ry="3" fill="#ca8a04" />
+          <path d="M40,26 L36,21 M48,26 L52,21" stroke="#fef08a" stroke-width="1.5" stroke-linecap="round" />
+          <rect x="42" y="18" width="8" height="8" rx="1" fill="#ef4444" transform="rotate(12 46 22)" />
+          <rect x="45" y="18" width="2" height="8" fill="#facc15" transform="rotate(12 46 22)" />
+        </g>
+        <g id="santa-figure">
+          <path d="M62,48 C63,40 70,36 78,35 C88,34 96,38 98,46 C95,54 88,58 76,58 C68,58 63,54 62,48 Z"
+            fill="#dc2626" />
+          <path d="M82,43 C88,44 94,45 102,46 C105,46 106,48 103,50 C96,50 90,48 84,47 Z" fill="#dc2626" />
+          <circle cx="103" cy="47" r="3" fill="#1e293b" />
+          <ellipse cx="98" cy="46" rx="2" ry="3.5" fill="#ffffff" />
+          <circle cx="82" cy="30" r="7" fill="#fbcfe8" />
+          <circle cx="88" cy="31" r="2.2" fill="#f87171" />
+          <path d="M84,33 C90,34 92,38 90,43 C86,48 78,48 74,44 C72,40 74,36 80,34 Z" fill="#ffffff"
+            filter="drop-shadow(0 2px 3px rgba(0,0,0,0.2))" />
+          <path d="M86,33 C91,33 93,36 90,37 C87,37 85,35 84,34 Z" fill="#ffffff" />
+          <path d="M76,28 C78,22 84,20 89,23 C88,27 82,29 76,28 Z" fill="#dc2626" />
+          <path d="M74,27 C78,27 85,28 89,30 C88,32 82,31 74,29 Z" fill="#ffffff" />
+          <path d="M76,25 C72,25 67,27 65,30 C66,32 70,30 74,28 Z" fill="#dc2626" />
+          <circle cx="64" cy="31" r="3" fill="#ffffff" filter="drop-shadow(0 0 4px #ffffff)" />
+        </g>
+      </g>
+    </svg>
+  </div>
+
+
+  <!-- 🌡️ BADGE THỜI TIẾT THỰC TẾ (GEOLOCATION + OPEN-METEO) -->
+  <div id="weather-badge" class="weather-badge" aria-live="polite" title="Thời tiết thực tế tại vị trí bạn">
+    <i id="weather-icon-el" class="fa-solid fa-location-dot text-red-400"></i>
+    <span id="weather-text">Đang lấy vị trí...</span>
+  </div>
+
+  <!-- 6. KHÔNG GIAN CHÍNH: PHONG BÌ 3D & LÁ THƯ CHÚC MỪNG -->
+  <main class="relative z-20 flex-1 flex flex-col justify-center items-center px-2 sm:px-4 py-1 sm:py-3 w-full">
+    <div class="card-stage-container w-full flex flex-col items-center my-auto">
+      <div class="scene-container">
+
+        <!-- ==================== A. PHONG BÌ 3D ĐỎ RƯỢU VANG ==================== -->
+        <div id="envelope-box" class="envelope-box" title="Nhấp vào để mở thiệp Giáng Sinh">
+          <!-- Viền chỉ vàng kim -->
+          <div class="envelope-gold-border"></div>
+
+          <!-- Tem thư Noel cổ điển -->
+          <div class="postal-stamp">
+            <div class="stamp-inner">
+              <i class="fa-solid fa-tree text-emerald-700 text-lg mb-0.5"></i>
+              <span class="text-[8px] font-bold text-red-800 tracking-tighter">NORTH POLE</span>
+              <span class="text-[9px] font-black text-amber-700 font-serif">25 DEC</span>
+              <span class="text-[7px] text-slate-600 tracking-widest mt-0.5">AIR MAIL</span>
+            </div>
+          </div>
+
+          <!-- Dấu bưu điện đóng tròn -->
+          <div class="postmark-seal">
+            <div class="text-[7.5px] font-bold text-amber-300 text-center tracking-wider leading-tight">
+              ★ OFFICIAL ★<br>SANTA POST<br>2026
+            </div>
+          </div>
+
+          <!-- Nắp trên gập 3D -->
+          <div class="envelope-flap-top" id="envelope-top-flap"></div>
+
+          <!-- Cánh gập trái, phải, đáy -->
+          <div class="envelope-flap-left"></div>
+          <div class="envelope-flap-right"></div>
+          <div class="envelope-flap-bottom"></div>
+
+          <!-- Dải ruy băng trang trí tinh tế -->
+          <div
+            class="absolute inset-x-0 top-1/2 -translate-y-1/2 h-8 bg-gradient-to-r from-transparent via-amber-400/20 to-transparent pointer-events-none z-[6]">
+          </div>
+
+          <!-- Con dấu sáp đỏ trung tâm (Royal Wax Seal) -->
+          <div id="wax-seal" class="wax-seal" title="Bấm vào con dấu để mở thiệp">
+            <div
+              class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-amber-300/40 flex items-center justify-center bg-red-900/40 shadow-inner">
+              <i
+                class="fa-solid fa-snowflake text-lg sm:text-2xl text-amber-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.7)]"></i>
+            </div>
+          </div>
+
+          <!-- Nhãn hướng dẫn mở thiệp nhấp nháy -->
+          <div id="open-hint-badge" class="open-hint-badge">
+            <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i>
+            <span>Chạm vào con dấu để mở thiệp</span>
+          </div>
+        </div>
+
+        <!-- NÚT QUAY LẠI 4 LỰA CHỌN KHI PHONG BÌ ĐANG ĐÓNG -->
+        <div id="envelope-nav-bar" class="envelope-nav-bar flex items-center justify-center z-30">
+          <a href="index.html?step=hub" id="btn-back-hub-envelope" class="envelope-back-hub-btn"
+            title="Quay lại 4 món quà Giáng Sinh">
+            <i class="fa-solid fa-arrow-left text-xs text-amber-300"></i>
+            <i class="fa-solid fa-gift text-xs text-amber-300"></i>
+            <span>Quay lại 4 món quà</span>
+          </a>
+        </div>
+
+        <!-- ==================== B. LÁ THƯ CHÚC MỪNG (THE VINTAGE LETTER & BACKDROP ENVELOPE) ==================== -->
+        <div id="card-wrapper" class="card-wrapper">
+          <div id="card-scene" class="card-scene">
+
+            <!-- PHONG BÌ QUÀ ĐỎ RƯỢU PHÍA SAU (ĐÃ TẮT TRIỆT ĐỂ ĐỂ KHÔNG HIỆN KHUNG ẢNH THỨ 2) -->
+            <div class="envelope-backdrop hidden pointer-events-none" style="display: none !important;" aria-hidden="true">
+              <img src="assets/intro/bow.png" class="envelope-bow-decor" alt="Velvet Bow">
+              <div class="envelope-stamp">
+                <span class="font-bold text-xs">★ 25 ★</span>
+                <span>DECEMBER</span>
+                <span class="opacity-80 text-[8px]">SANTA POST</span>
+              </div>
+              <div class="text-[10px] font-bold tracking-[2px] text-amber-300/40">
+                NORTH POLE EXPRESS MAIL
+              </div>
+            </div>
+
+            <!-- LÁ THƯ CHÚC MỪNG PHÍA TRƯỚC (GREETING CARD - THIỆP ĐỎ RƯỢU HOÀNG GIA BAN ĐẦU) -->
+            <article id="greeting-card" class="letter-sheet">
+              <!-- Họa tiết dải nơ trên đầu thư -->
+              <div class="letter-ribbon-header">
+                <svg viewBox="0 0 380 48" width="100%" height="48" fill="none" stroke="#fcd34d" stroke-width="1.8"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <!-- Dải ruy băng lượn sóng bên trái có vòng xoắn -->
+                  <path d="M15 24 C 50 8, 90 36, 125 18 C 138 12, 150 20, 162 24" stroke-width="1.6" />
+                  <path d="M15 24 C 25 16, 32 32, 45 24" stroke-width="1.2" opacity="0.6" />
+                  <circle cx="85" cy="23" r="3" fill="#fcd34d" fill-opacity="0.3" stroke-width="1.2" />
+                  <!-- Dải ruy băng lượn sóng bên phải có vòng xoắn -->
+                  <path d="M365 24 C 330 8, 290 36, 255 18 C 242 12, 230 20, 218 24" stroke-width="1.6" />
+                  <path d="M365 24 C 355 16, 348 32, 335 24" stroke-width="1.2" opacity="0.6" />
+                  <circle cx="295" cy="23" r="3" fill="#fcd34d" fill-opacity="0.3" stroke-width="1.2" />
+                  <!-- Cánh nơ trái -->
+                  <path d="M190 24 C 176 8, 152 8, 158 24 C 162 38, 184 32, 190 24 Z" fill="#fcd34d" fill-opacity="0.18"
+                    stroke-width="2" />
+                  <!-- Cánh nơ phải -->
+                  <path d="M190 24 C 204 8, 228 8, 222 24 C 218 38, 196 32, 190 24 Z" fill="#fcd34d" fill-opacity="0.18"
+                    stroke-width="2" />
+                  <!-- Nút thắt nơ -->
+                  <ellipse cx="190" cy="24" rx="5.5" ry="6.5" fill="#eab308" stroke="#fef08a" stroke-width="1.4" />
+                  <!-- Đuôi nơ rủ xuống -->
+                  <path d="M187 29 C 180 40, 172 44, 165 47" stroke-width="1.8" />
+                  <path d="M193 29 C 200 40, 208 44, 215 47" stroke-width="1.8" />
+                </svg>
+              </div>
+
+              <!-- Lời chào đầu thư -->
+              <h3 id="card-recipient-name" class="letter-salutation">Dear Ngọc Anh...</h3>
+
+              <!-- Nội dung tâm thư -->
+              <div class="letter-body">
+                <p id="card-message-text">
+                  Chúc Ngọc Anh một mùa Giáng Sinh thật vui vẻ, ấm áp và luôn giữ được nụ cười thật tươi nhé. Dạo này
+                  trời lạnh rồi, đi ra ngoài nhớ mặc thật ấm, quàng khăn và nhớ chăm sóc bản thân thật tốt nha. Đừng ham
+                  chơi mà bị ốm nhe.
+                </p>
+                <p id="card-message-text-p3">
+                  Cảm ơn Ngọc Anh vì đã lắng nghe những điều mình đã tâm sự và giúp mình gỡ rối những lúc bế tắc. Mong
+                  rằng sang năm mới, cậu vẫn sẽ luôn vui vẻ, gặp thật nhiều may mắn, làm được những điều mình mong muốn
+                  và có thật nhiều lý do để mỉm cười mỗi ngày. Và bất cứ lúc nào cậu cần một người lắng nghe, mình vẫn
+                  luôn ở đây!
+                </p>
+                <p id="card-message-text-p4">
+                  Giáng Sinh an lành nhé, Ngọc Anh! Chúc cậu có một mùa Noel thật ấm áp và thật nhiều niềm vui!
+                </p>
+              </div>
+
+              <!-- Đáy thư: Ảnh Polaroid bên trái + Chữ ký vàng bên phải -->
+              <div class="letter-footer">
+                <div id="polaroid-frame-box" class="polaroid-frame" role="button" tabindex="0"
+                  title="Chạm để đổi ảnh kỷ niệm của bạn 📸">
+                  <img id="polaroid-img-el" src="assets/girl_portrait_clean.png" alt="Ảnh kỷ niệm" class="polaroid-img">
+                  <span class="polaroid-caption">Sweet Memories</span>
+                  <div class="polaroid-hint-badge" title="Đổi ảnh kỷ niệm">
+                    <i class="fa-solid fa-camera"></i>
+                  </div>
+                  <input type="file" id="polaroid-file-input" accept="image/*" class="hidden" style="display:none;">
+                </div>
+
+                <div id="card-sender-name" class="letter-signature">
+                  Merry Christmas!
+                </div>
+              </div>
+
+            </article>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 7. THANH CÔNG CỤ HÀNH ĐỘNG DƯỚI ĐÁY KHI THIỆP ĐÃ MỞ -->
+      <div id="bottom-action-bar"
+        class="hidden mt-3 sm:mt-5 flex items-center justify-center gap-2 sm:gap-3 flex-wrap z-30 animate-fade-in px-2">
+        <!-- Nút 1: Chụp và tải ảnh thiệp PNG -->
+        <button id="btn-download-card"
+          class="festive-btn-gold px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm cursor-pointer shadow-lg active:scale-95 transition-all whitespace-nowrap">
+          <i class="fa-solid fa-camera text-xs sm:text-sm"></i>
+          <span>Tải ảnh thiệp</span>
+        </button>
+
+        <!-- Nút 2: Đổi ảnh kỷ niệm -->
+        <button id="btn-change-photo"
+          class="festive-btn-gold px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full flex items-center gap-1.5 text-xs sm:text-sm cursor-pointer shadow-lg active:scale-95 transition-all whitespace-nowrap"
+          title="Chọn ảnh khác từ máy của bạn">
+          <i class="fa-solid fa-image text-xs sm:text-sm"></i>
+          <span>Đổi ảnh</span>
+        </button>
+
+        <!-- Nút 3: Gấp thiệp lại phong bì -->
+        <button id="btn-fold-card"
+          class="festive-btn-red px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full flex items-center gap-1.5 text-xs sm:text-sm cursor-pointer shadow-lg active:scale-95 transition-all whitespace-nowrap">
+          <i class="fa-solid fa-envelope text-xs sm:text-sm"></i>
+          <span>Gấp thiệp lại</span>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Chú Người Tuyết vẫy tay ở góc dưới bên trái -->
+  <div id="scenery-snowman" class="scenery-snowman interactive-snowman cursor-pointer" role="button" tabindex="0"
+    title="Chạm vào Người Tuyết để trò chuyện!">
+    <div id="snowman-bubble" class="snowman-bubble" aria-live="polite">
+      <span id="snowman-speech-text">Chào bạn! Chúc bạn Giáng Sinh 2026 ngập tràn niềm vui! ⛄❄️</span>
+      <div class="snowman-bubble-tail"></div>
+    </div>
+
+    <svg viewBox="0 0 120 150" class="w-16 sm:w-24 md:w-28 h-auto filter drop-shadow-[0_8px_16px_rgba(0,0,0,0.5)]">
+      <path d="M25 110 L15 130 L35 130 Z" fill="#1b4332" />
+      <path d="M25 95 L18 115 L32 115 Z" fill="#2d6a4f" />
+      <path d="M25 95 Q28 100 32 100 Q20 100 25 95" fill="#ffffff" />
+
+      <circle cx="70" cy="112" r="32" fill="#ffffff" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.15))" />
+      <circle cx="65" cy="108" r="28" fill="url(#snowballShade)" />
+      <circle cx="70" cy="102" r="2.8" fill="#1e293b" />
+      <circle cx="70" cy="114" r="2.8" fill="#1e293b" />
+      <circle cx="70" cy="126" r="2.8" fill="#1e293b" />
+
+      <circle cx="70" cy="65" r="22" fill="#ffffff" />
+      <circle cx="63" cy="60" r="2.2" fill="#0f172a" />
+      <circle cx="77" cy="60" r="2.2" fill="#0f172a" />
+      <circle cx="58" cy="67" r="3" fill="#fca5a5" opacity="0.6" />
+      <circle cx="82" cy="67" r="3" fill="#fca5a5" opacity="0.6" />
+      <polygon points="70,64 70,68 86,67" fill="#f97316" stroke="#c2410c" stroke-width="0.5" />
+      <circle cx="63" cy="72" r="1.2" fill="#1e293b" />
+      <circle cx="67" cy="74" r="1.2" fill="#1e293b" />
+      <circle cx="73" cy="74" r="1.2" fill="#1e293b" />
+      <circle cx="77" cy="72" r="1.2" fill="#1e293b" />
+
+      <path d="M50 78 Q70 86 90 78 Q92 84 88 86 Q70 94 52 86 Z" fill="#dc2626" />
+      <path d="M78 84 L80 108 L72 106 L74 84 Z" fill="#b91c1c" />
+      <line x1="72" y1="106" x2="80" y2="108" stroke="#fef08a" stroke-width="1.5" stroke-dasharray="2,2" />
+
+      <ellipse cx="70" cy="48" rx="20" ry="4" fill="#0f172a" />
+      <rect x="58" y="24" width="24" height="23" rx="2" fill="#1e293b" />
+      <rect x="58" y="42" width="24" height="4" fill="#dc2626" />
+      <circle cx="62" cy="40" r="2" fill="#22c55e" />
+      <circle cx="64" cy="41" r="1.5" fill="#ef4444" />
+
+      <g class="snowman-waving-arm">
+        <path d="M48 95 L26 80 M28 82 L20 75 M28 82 L24 88" stroke="#78350f" stroke-width="2.5"
+          stroke-linecap="round" />
+      </g>
+      <path d="M92 95 L110 90 M105 91 L114 85 M105 91 L112 96" stroke="#78350f" stroke-width="2.5"
+        stroke-linecap="round" />
+    </svg>
+  </div>
+
+  <!-- Chiếc Đèn Lồng Giáng Sinh cổ điển ở góc dưới bên phải -->
+  <div id="scenery-lantern" class="scenery-lantern interactive-lantern cursor-pointer" role="button" tabindex="0"
+    title="Chạm vào Đèn Bão để thắp sáng nguyện ước Giáng Sinh!">
+    <svg viewBox="0 0 110 140" class="w-14 sm:w-20 md:w-24 h-auto filter drop-shadow-[0_0_20px_rgba(255,215,0,0.7)]">
+      <defs>
+        <radialGradient id="lanternGlow" cx="50%" cy="55%" r="50%">
+          <stop offset="0%" stop-color="#fffbeb" stop-opacity="1" />
+          <stop offset="40%" stop-color="#fef08a" stop-opacity="0.9" />
+          <stop offset="70%" stop-color="#f59e0b" stop-opacity="0.5" />
+          <stop offset="100%" stop-color="#b45309" stop-opacity="0" />
+        </radialGradient>
+      </defs>
+
+      <circle cx="55" cy="18" r="10" fill="none" stroke="#d4af37" stroke-width="3" />
+      <path d="M35 32 L55 24 L75 32 L70 38 L40 38 Z" fill="#92400e" stroke="#d4af37" stroke-width="1.5" />
+      <rect x="42" y="38" width="26" height="5" fill="#78350f" />
+
+      <polygon points="38 43 72 43 78 100 32 100" fill="url(#lanternGlow)" stroke="#78350f" stroke-width="2" />
+      <line x1="38" y1="43" x2="32" y2="100" stroke="#d4af37" stroke-width="2" />
+      <line x1="72" y1="43" x2="78" y2="100" stroke="#d4af37" stroke-width="2" />
+      <line x1="55" y1="43" x2="55" y2="100" stroke="#d4af37" stroke-width="1.2" opacity="0.6" />
+
+      <rect x="48" y="75" width="14" height="23" rx="2" fill="#fffdf5" stroke="#fde047" stroke-width="0.8" />
+      <g class="candle-flame">
+        <path d="M55 75 Q50 63 55 56 Q60 63 55 75 Z" fill="#f59e0b" filter="drop-shadow(0 0 8px #ffd700)" />
+        <ellipse cx="55" cy="69" rx="2.5" ry="4.5" fill="#fffbeb" />
+      </g>
+
+      <path d="M26 100 L84 100 L88 110 L22 110 Z" fill="#78350f" stroke="#d4af37" stroke-width="1.5" />
+      <rect x="20" y="110" width="70" height="6" rx="2" fill="#581c87" opacity="0.1" />
+
+      <circle cx="55" cy="38" r="3" fill="#dc2626" />
+      <path d="M55 38 C50 32, 42 35, 52 38 Z" fill="#ef4444" />
+      <path d="M55 38 C60 32, 68 35, 58 38 Z" fill="#ef4444" />
+    </svg>
+  </div>
+
+  <!-- 8. PHÁT NHẠC NỀN BÀI HÁT "WHAM - LAST CHRISTMAS" -->
+  <audio id="bgm-audio" src="Wham%20-%20Last%20Christmas%20(Lyrics).mp3" preload="metadata" loop></audio>
+
+  <!-- 9. TOAST THÔNG BÁO TIỆN ÍCH -->
+  <div id="toast-notification" class="toast-notice">
+    <i class="fa-solid fa-wand-magic-sparkles text-gold-400"></i>
+    <span id="toast-text">Thông báo</span>
+  </div>
+
+  <!-- ==================== MODAL 1: MỞ HỘP QUÀ - RÚT QUẺ MAY MẮN ==================== -->
+  <div id="fortune-modal" class="festive-modal-backdrop hidden" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="festive-modal-card fortune-modal-content">
+      <button id="btn-close-fortune" class="modal-close-btn" aria-label="Đóng">&times;</button>
+
+      <div class="fortune-icon-float">
+        <div id="fortune-gift-icon" class="fortune-gift-circle">🎁</div>
+      </div>
+
+      <div class="text-center mb-2 sm:mb-3">
+        <div
+          class="flex items-center justify-center gap-1.5 text-amber-300 text-[10px] sm:text-xs uppercase tracking-widest font-semibold">
+          <i class="fa-solid fa-sparkles text-amber-400"></i>
+          <span id="fortune-box-type">Quẻ May Mắn Giáng Sinh 2026</span>
+          <i class="fa-solid fa-sparkles text-amber-400"></i>
+        </div>
+        <h3 id="fortune-title"
+          class="font-christmas text-2xl sm:text-3xl text-gold-300 font-bold mt-0.5 tracking-wide drop-shadow-[0_1px_4px_rgba(245,207,104,0.4)]">
+          Vạn Sự Như Ý
+        </h3>
+      </div>
+
+      <div class="fortune-paper-slip">
+        <p id="fortune-quote"
+          class="font-dancing text-stone-900 text-[15px] sm:text-lg text-center leading-relaxed font-bold">
+          "Giáng Sinh an lành mang theo điều diệu kỳ. Năm 2026 mở ra cánh cửa của may mắn ngập tràn, vạn sự hanh thông
+          và tài lộc viên mãn!"
+        </p>
+        <div class="fortune-meta-grid">
+          <div class="fortune-meta-item">
+            <span class="meta-label">Con số may mắn 2026:</span>
+            <span id="fortune-number" class="meta-val">26</span>
+          </div>
+          <div class="fortune-meta-item">
+            <span class="meta-label">Màu sắc thịnh vượng:</span>
+            <span id="fortune-color" class="meta-val">Đỏ Rượu & Vàng Kim</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-center gap-2 sm:gap-3 mt-3.5 sm:mt-4">
+        <button id="btn-reroll-fortune"
+          class="festive-btn-gold px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm flex items-center gap-1.5 cursor-pointer shadow-md active:scale-95 transition-all">
+          <i class="fa-solid fa-rotate-right text-xs"></i>
+          <span>Rút quẻ khác</span>
+        </button>
+        <button id="btn-accept-fortune"
+          class="festive-btn-red px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm flex items-center gap-1.5 cursor-pointer shadow-md active:scale-95 transition-all">
+          <i class="fa-solid fa-check text-xs"></i>
+          <span>Nhận lộc Giáng Sinh</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL CẮT ẢNH HÌNH VUÔNG 1:1 (CROPPER CHO POLAROID) -->
+  <div id="image-crop-modal"
+    class="fixed inset-0 z-[110] flex items-center justify-center p-3 bg-black/85 backdrop-blur-md hidden transition-all duration-300">
+    <div
+      class="relative max-w-md w-full max-h-[95vh] flex flex-col items-center bg-[#18040a] border border-amber-300/40 rounded-2xl shadow-2xl overflow-hidden p-4 sm:p-5">
+
+      <!-- Tiêu đề modal -->
+      <div class="flex items-center justify-between w-full pb-2 mb-2 border-b border-amber-300/20">
+        <h3 class="font-christmas text-lg sm:text-xl text-amber-200 font-bold flex items-center gap-2">
+          <span>✂️</span> Cắt Ảnh Vuông (1:1)
+        </h3>
+        <button id="btn-close-crop-modal"
+          class="text-white/60 hover:text-white p-1 text-xl cursor-pointer transition-colors" title="Đóng">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <p class="text-xs text-amber-100/75 text-center mb-2.5">
+        Ảnh đã chọn không phải hình vuông. Hãy di chuyển, phóng to hoặc xoay để chọn khung ảnh ưng ý nhất!
+      </p>
+
+      <!-- Khung hiển thị Cropper -->
+      <div
+        class="w-full h-[45vh] sm:h-[48vh] max-h-[350px] bg-black/70 rounded-xl overflow-hidden border border-amber-200/25 flex items-center justify-center relative">
+        <img id="crop-target-img" src="" alt="Ảnh cần cắt" class="max-w-full block" style="max-height: 100%;">
+      </div>
+
+      <!-- Thanh công cụ xoay & zoom -->
+      <div class="flex items-center justify-center gap-2.5 sm:gap-3 my-3 w-full">
+        <button id="btn-crop-zoom-out" type="button" class="crop-tool-btn" title="Thu nhỏ">
+          <i class="fa-solid fa-magnifying-glass-minus"></i>
+        </button>
+        <button id="btn-crop-zoom-in" type="button" class="crop-tool-btn" title="Phóng to">
+          <i class="fa-solid fa-magnifying-glass-plus"></i>
+        </button>
+        <button id="btn-crop-rotate-left" type="button" class="crop-tool-btn" title="Xoay trái 90°">
+          <i class="fa-solid fa-rotate-left"></i>
+        </button>
+        <button id="btn-crop-rotate-right" type="button" class="crop-tool-btn" title="Xoay phải 90°">
+          <i class="fa-solid fa-rotate-right"></i>
+        </button>
+        <button id="btn-crop-reset" type="button" class="crop-tool-btn" title="Đặt lại vị trí ban đầu">
+          <i class="fa-solid fa-arrows-rotate"></i>
+        </button>
+      </div>
+
+      <!-- Nút hành động -->
+      <div class="flex items-center justify-end gap-2.5 sm:gap-3 w-full pt-2 border-t border-amber-300/20">
+        <button id="btn-crop-cancel" type="button"
+          class="px-4 py-1.5 sm:py-2 rounded-full border border-white/20 text-white/80 hover:bg-white/10 text-xs sm:text-sm font-semibold transition-all">
+          Hủy bỏ
+        </button>
+        <button id="btn-crop-apply" type="button"
+          class="festive-btn-gold px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-lg active:scale-95 transition-all">
+          <i class="fa-solid fa-check"></i> Cắt & Áp dụng
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL XEM & LƯU ẢNH THIỆP (DÀNH CHO ĐIỆN THOẠI & MÁY TÍNH) -->
+  <div id="card-download-modal"
+    class="fixed inset-0 z-[100] flex items-center justify-center p-3 bg-black/85 backdrop-blur-md hidden transition-all duration-300">
+    <div
+      class="relative max-w-sm w-full max-h-[92vh] flex flex-col items-center bg-[#1a050b] border border-amber-300/40 rounded-2xl shadow-2xl overflow-hidden p-4">
+      <div class="flex items-center justify-between w-full pb-2 mb-2 border-b border-amber-300/20">
+        <h3 class="font-christmas text-xl text-amber-200 font-bold flex items-center gap-2">
+          <span>🎄</span> Ảnh Thiệp Giáng Sinh
+        </h3>
+        <button id="btn-close-download-modal" class="text-white/60 hover:text-white p-1 text-xl cursor-pointer">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <p class="text-xs text-amber-100/75 text-center mb-2.5">
+        📱 <strong>Điện thoại:</strong> Chạm giữ ảnh bên dưới để chọn <em>"Lưu hình ảnh"</em> vào Thư viện ảnh của bạn.
+      </p>
+      <div class="overflow-y-auto w-full flex justify-center py-1">
+        <img id="card-download-preview-img" src="" alt="Ảnh thiệp Giáng Sinh"
+          class="max-h-[58vh] rounded-xl shadow-lg border border-amber-200/20 object-contain">
+      </div>
+      <div class="flex items-center gap-2.5 mt-3 w-full justify-center">
+        <a id="btn-modal-direct-download" href="#" download="Merry_Christmas_Letter.png"
+          class="festive-btn-gold px-3.5 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-lg active:scale-95 transition-all">
+          <i class="fa-solid fa-download"></i> Tải về máy
+        </a>
+        <button id="btn-modal-close"
+          class="festive-btn-red px-3.5 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-lg active:scale-95 transition-all">
+          <i class="fa-solid fa-check"></i> Xong
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT -->
+  <script src="js/common.js"></script>
+  <script src="js/thiep.js?v=11.0"></script>
+</body>
+
+</html>

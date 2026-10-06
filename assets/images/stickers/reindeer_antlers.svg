@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 120" width="180" height="120">
+  <defs>
+    <linearGradient id="antlerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b45309" />
+      <stop offset="50%" stop-color="#92400e" />
+      <stop offset="100%" stop-color="#78350f" />
+    </linearGradient>
+    <filter id="antlerShadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-opacity="0.3" />
+    </filter>
+  </defs>
+  <!-- Bờm cài đầu màu đỏ nỉ -->
+  <path d="M 38 108 C 55 92, 125 92, 142 108" fill="none" stroke="#dc2626" stroke-width="7" stroke-linecap="round" filter="url(#antlerShadow)" />
+  <path d="M 40 108 C 55 94, 125 94, 140 108" fill="none" stroke="#f87171" stroke-width="2.5" stroke-linecap="round" opacity="0.6" />
+  
+  <!-- Tai trái và tai phải nhỏ xinh -->
+  <path d="M 38 98 C 22 92, 18 80, 24 72 C 32 78, 38 88, 42 96 Z" fill="#92400e" filter="url(#antlerShadow)" />
+  <path d="M 36 94 C 26 88, 23 81, 26 76 C 30 80, 36 86, 38 93 Z" fill="#fbcfe8" opacity="0.8" />
+  <path d="M 142 98 C 158 92, 162 80, 156 72 C 148 78, 142 88, 138 96 Z" fill="#92400e" filter="url(#antlerShadow)" />
+  <path d="M 144 94 C 154 88, 157 81, 154 76 C 150 80, 144 86, 142 93 Z" fill="#fbcfe8" opacity="0.8" />
+
+  <!-- Sừng trái -->
+  <g fill="url(#antlerGrad)" filter="url(#antlerShadow)">
+    <path d="M 52 94 C 48 72, 38 52, 28 32 C 26 28, 32 24, 36 28 C 44 40, 52 54, 58 70 C 62 55, 68 42, 60 22 C 58 18, 65 14, 68 18 C 76 34, 76 56, 68 84 Z" />
+    <path d="M 36 50 C 24 45, 15 48, 12 42 C 10 38, 16 35, 22 38 C 28 40, 34 43, 38 46 Z" />
+    <path d="M 64 45 C 72 38, 80 40, 84 36 C 86 32, 80 28, 74 32 C 68 36, 64 40, 62 44 Z" />
+  </g>
+
+  <!-- Sừng phải đối xứng -->
+  <g fill="url(#antlerGrad)" filter="url(#antlerShadow)">
+    <path d="M 128 94 C 132 72, 142 52, 152 32 C 154 28, 148 24, 144 28 C 136 40, 128 54, 122 70 C 118 55, 112 42, 120 22 C 122 18, 115 14, 112 18 C 104 34, 104 56, 112 84 Z" />
+    <path d="M 144 50 C 156 45, 165 48, 168 42 C 170 38, 164 35, 158 38 C 152 40, 146 43, 142 46 Z" />
+    <path d="M 116 45 C 108 38, 100 40, 96 36 C 94 32, 100 28, 106 32 C 112 36, 116 40, 118 44 Z" />
+  </g>
+  <!-- Nơ nhỏ giữa bờm -->
+  <circle cx="90" cy="98" r="4.5" fill="#ffd700" />
+</svg>

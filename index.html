@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="vi" class="h-full">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Món Quà Giáng Sinh 2026 🎄</title>
+
+  <!-- GOOGLE FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@600;700;800&family=Dancing+Script:wght@400;500;600;700&family=Great+Vibes&family=Mountains+of+Christmas:wght@700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Quicksand:wght@500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- TAILWIND CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- FONT AWESOME ICONS CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- CANVAS-CONFETTI CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+  <!-- CUSTOM STYLES -->
+  <link rel="stylesheet" href="css/style.css?v=13.0">
+
+  <!-- INSTANT HUB VIEW: Loại bỏ hoàn toàn độ trễ / giật của Bước 1 khi quay lại ?step=hub -->
+  <script>
+    if (window.location.search.includes('step=hub') || window.location.hash === '#hub') {
+      document.documentElement.classList.add('direct-hub-view');
+    }
+  </script>
+  <style>
+    html.direct-hub-view #intro-step-1,
+    html.direct-hub-view #intro-step-2,
+    html.direct-hub-view #intro-step-3 {
+      display: none !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+      transition: none !important;
+    }
+    html.direct-hub-view #intro-step-4 {
+      display: flex !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      pointer-events: auto !important;
+      transition: none !important;
+    }
+    html.direct-hub-view #intro-step-4 .intro-hub-header,
+    html.direct-hub-view #intro-step-4 .hub-card-item {
+      opacity: 1 !important;
+      animation: none !important;
+      transform: none !important;
+      visibility: visible !important;
+      filter: none !important;
+    }
+  </style>
+</head>
+
+<body class="bg-[#040914] text-white flex flex-col min-h-screen min-h-[100dvh]">
+
+  <!-- BỘ THẺ CHÀO MỪNG BAN ĐẦU & MENU 4 SỰ LỰA CHỌN -->
+  <div id="intro-overlay" class="intro-overlay">
+    <div class="intro-backdrop"></div>
+    <div class="intro-card-container">
+
+      <!-- BƯỚC 1: DẢI NƠ ĐỎ GIÁNG SINH -->
+      <div id="intro-step-1" class="intro-card-step active" data-step="1">
+        <div class="intro-parchment-card">
+          <div class="intro-corner-ornament intro-corner-tl"></div>
+          <div class="intro-corner-ornament intro-corner-tr"></div>
+          <div class="intro-corner-ornament intro-corner-bl"></div>
+          <div class="intro-corner-ornament intro-corner-br"></div>
+
+          <div class="intro-sparkle intro-sparkle-1">✦</div>
+          <div class="intro-sparkle intro-sparkle-2">❄</div>
+          <div class="intro-sparkle intro-sparkle-3">★</div>
+          <div class="intro-sparkle intro-sparkle-4">❄</div>
+          <div class="intro-sparkle intro-sparkle-5">✦</div>
+          <div class="intro-sparkle intro-sparkle-6">★</div>
+
+          <div class="intro-illustration-wrap">
+            <img src="assets/intro/bow.png" alt="Dải Nơ Giáng Sinh" class="intro-img intro-img-bow" />
+          </div>
+
+          <div class="intro-text-block">
+            <div class="intro-date-badge">
+              <span class="intro-badge-deco">✦</span> DECEMBER 2026 <span class="intro-badge-deco">✦</span>
+            </div>
+            <h2 class="intro-script-title">I Have Something For You</h2>
+            <div class="intro-gold-divider">
+              <span class="intro-divider-line"></span>
+              <span class="intro-divider-star">✦</span>
+              <span class="intro-divider-line"></span>
+            </div>
+            <p class="intro-card-quote">“The most wonderful moments always begin with sweet little surprises...”</p>
+          </div>
+
+          <div class="intro-action-block">
+            <button id="btn-intro-click-here" class="intro-btn intro-btn-burgundy" type="button">
+              <span>CLICK HERE</span>
+              <i class="fa-solid fa-sparkles text-xs"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- BƯỚC 2: GẤU NOEL & HỘP QUÀ -->
+      <div id="intro-step-2" class="intro-card-step" data-step="2">
+        <div class="intro-parchment-card">
+          <div class="intro-corner-ornament intro-corner-tl"></div>
+          <div class="intro-corner-ornament intro-corner-tr"></div>
+          <div class="intro-corner-ornament intro-corner-bl"></div>
+          <div class="intro-corner-ornament intro-corner-br"></div>
+
+          <div class="intro-sparkle intro-sparkle-1">✦</div>
+          <div class="intro-sparkle intro-sparkle-2">❄</div>
+          <div class="intro-sparkle intro-sparkle-3">★</div>
+          <div class="intro-sparkle intro-sparkle-4">❄</div>
+          <div class="intro-sparkle intro-sparkle-5">✦</div>
+          <div class="intro-sparkle intro-sparkle-6">★</div>
+
+          <div class="intro-illustration-wrap">
+            <img src="assets/intro/bear.png" alt="Gấu Noel và Hộp Quà" class="intro-img intro-img-bear" />
+          </div>
+
+          <div class="intro-text-block">
+            <div class="intro-date-badge">
+              <span class="intro-badge-deco">✦</span> SPECIAL GIFT FOR YOU <span class="intro-badge-deco">✦</span>
+            </div>
+            <h2 class="intro-script-title">Are You Ready?</h2>
+            <div class="intro-gold-divider">
+              <span class="intro-divider-line"></span>
+              <span class="intro-divider-star">✦</span>
+              <span class="intro-divider-line"></span>
+            </div>
+            <p class="intro-card-quote">“A warm holiday secret is ready and waiting just for you...”</p>
+          </div>
+
+          <div class="intro-action-block">
+            <button id="btn-intro-yes" class="intro-btn intro-btn-burgundy" type="button">
+              <span>YES, I DO!</span>
+            </button>
+            <button id="btn-intro-no" class="intro-btn intro-btn-outline" type="button">
+              <span>NO, THANKS</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- BƯỚC 3: MÈO NÀI NỈ ĐÁNG YÊU -->
+      <div id="intro-step-3" class="intro-card-step" data-step="3">
+        <div class="intro-parchment-card">
+          <div class="intro-corner-ornament intro-corner-tl"></div>
+          <div class="intro-corner-ornament intro-corner-tr"></div>
+          <div class="intro-corner-ornament intro-corner-bl"></div>
+          <div class="intro-corner-ornament intro-corner-br"></div>
+
+          <div class="intro-sparkle intro-sparkle-1">✦</div>
+          <div class="intro-sparkle intro-sparkle-2">❄</div>
+          <div class="intro-sparkle intro-sparkle-3">★</div>
+          <div class="intro-sparkle intro-sparkle-4">❄</div>
+          <div class="intro-sparkle intro-sparkle-5">✦</div>
+          <div class="intro-sparkle intro-sparkle-6">★</div>
+
+          <div class="intro-illustration-wrap">
+            <img src="assets/intro/cat.png" alt="Mèo Noel nài nỉ" class="intro-img intro-img-cat" />
+          </div>
+
+          <div class="intro-text-block">
+            <div class="intro-date-badge">
+              <span class="intro-badge-deco">✦</span> DON'T SAY NO <span class="intro-badge-deco">✦</span>
+            </div>
+            <h2 class="intro-script-title">Please Say Yes!</h2>
+            <div class="intro-gold-divider">
+              <span class="intro-divider-line"></span>
+              <span class="intro-divider-star">✦</span>
+              <span class="intro-divider-line"></span>
+            </div>
+            <p class="intro-card-quote">“Just look at these round little eyes... You wouldn't say no, right?”</p>
+          </div>
+
+          <div class="intro-action-block">
+            <button id="btn-intro-try-again" class="intro-btn intro-btn-burgundy" type="button">
+              <span>TRY AGAIN</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- BƯỚC 4: 4 SỰ LỰA CHỌN GIÁNG SINH (4 CHRISTMAS SURPRISES HUB) -->
+      <div id="intro-step-4" class="intro-card-step" data-step="4">
+        <div class="intro-parchment-card intro-hub-card">
+          <div class="intro-corner-ornament intro-corner-tl"></div>
+          <div class="intro-corner-ornament intro-corner-tr"></div>
+          <div class="intro-corner-ornament intro-corner-bl"></div>
+          <div class="intro-corner-ornament intro-corner-br"></div>
+
+          <div class="intro-sparkle intro-sparkle-1">✦</div>
+          <div class="intro-sparkle intro-sparkle-2">❄</div>
+          <div class="intro-sparkle intro-sparkle-3">★</div>
+          <div class="intro-sparkle intro-sparkle-4">❄</div>
+          <div class="intro-sparkle intro-sparkle-5">✦</div>
+          <div class="intro-sparkle intro-sparkle-6">★</div>
+
+          <div class="intro-hub-header">
+            <div class="intro-date-badge">
+              <span class="intro-badge-deco">✦</span> 4 CHRISTMAS SURPRISES <span class="intro-badge-deco">✦</span>
+            </div>
+            <h2 class="intro-script-title intro-hub-title">I Hope You Love It</h2>
+            <div class="intro-gold-divider">
+              <span class="intro-divider-line"></span>
+              <span class="intro-divider-star">✦</span>
+              <span class="intro-divider-line"></span>
+            </div>
+            <p class="intro-card-quote">“Choose a special gift you would like to unwrap first! ✨”</p>
+          </div>
+
+          <!-- Lưới 4 ô quà tặng 2x2 dẫn đến 4 trang riêng biệt -->
+          <div class="intro-hub-grid">
+            <!-- Ô 1: Chụp ảnh Photobooth -> photobooth.html -->
+            <a href="photobooth.html" id="hub-opt-photobooth" class="hub-card-item">
+              <div class="hub-card-thumb">
+                <img src="assets/intro/opt_camera.png" alt="Chụp ảnh Photobooth" class="hub-card-img" />
+              </div>
+              <div class="hub-card-label">Photobooth</div>
+              <div class="hub-card-hint">Khung hình Noel 📷</div>
+            </a>
+
+            <!-- Ô 2: Bó hoa Tulip tình yêu -> bouquet.html -->
+            <a href="bouquet.html" id="hub-opt-bouquet" class="hub-card-item">
+              <div class="hub-card-thumb">
+                <img src="assets/intro/opt_bouquet.png" alt="Bó hoa Tulip Noel" class="hub-card-img" />
+              </div>
+              <div class="hub-card-label">Bó Hoa</div>
+              <div class="hub-card-hint">Gửi Trao Ấm Áp🌷</div>
+            </a>
+
+            <!-- Ô 3: Game Trang Trí Cây Thông Noel -> game.html -->
+            <a href="game.html" id="hub-opt-game" class="hub-card-item">
+              <div class="hub-card-thumb">
+                <img src="assets/intro/opt_tree.png" alt="Trang Trí Cây Thông Noel" class="hub-card-img" />
+              </div>
+              <div class="hub-card-label">Trang Trí Cây Thông</div>
+              <div class="hub-card-hint">Cây thông Noel 🎄</div>
+            </a>
+
+            <!-- Ô 4: Vào mở lá thư thiệp chính -> thiep.html -->
+            <a href="thiep.html" id="hub-opt-letter" class="hub-card-item">
+              <div class="hub-card-thumb">
+                <img src="assets/intro/opt_letter.png" alt="Mở thiệp Giáng Sinh" class="hub-card-img" />
+              </div>
+              <div class="hub-card-label">Mở Thiệp</div>
+              <div class="hub-card-hint">Bức thư bí mật 💌</div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 1. BẦU TRỜ ĐÊM & CỰC QUANG (AURORA BOREALIS) -->
+  <div class="night-sky">
+    <div class="aurora-layer"></div>
+    <div class="aurora-layer-2"></div>
+    <div class="aurora-layer-3"></div>
+    <div class="stars-overlay"></div>
+  </div>
+
+  <!-- 2. CANVAS TUYẾT RƠI 3D VẬT LÝ & VỆT SAO BỤI THẦN TIÊN -->
+  <canvas id="snow-canvas"></canvas>
+  <canvas id="magic-trail-canvas" class="magic-trail-canvas" aria-hidden="true"></canvas>
+
+  <!-- 3. DÂY ĐÈN LED GIÁNG SINH TREO MÀN HÌNH (LIỀN MẠCH, KHÔNG VẾT CẮT) -->
+  <div class="fairy-lights-container" aria-hidden="true">
+    <div class="fairy-lights-track">
+      <div class="fairy-light-unit">
+        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
+          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        <div class="bulb-socket-cap"></div>
+        <div class="bulb-item bulb-gold"></div>
+      </div>
+      <div class="fairy-light-unit">
+        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
+          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        <div class="bulb-socket-cap"></div>
+        <div class="bulb-item bulb-red"></div>
+      </div>
+      <div class="fairy-light-unit">
+        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
+          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        <div class="bulb-socket-cap"></div>
+        <div class="bulb-item bulb-green"></div>
+      </div>
+      <div class="fairy-light-unit">
+        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
+          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        <div class="bulb-socket-cap"></div>
+        <div class="bulb-item bulb-blue"></div>
+      </div>
+      <div class="fairy-light-unit">
+        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
+          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        <div class="bulb-socket-cap"></div>
+        <div class="bulb-item bulb-pink"></div>
+      </div>
+      <div class="fairy-light-unit">
+        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
+          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        <div class="bulb-socket-cap"></div>
+        <div class="bulb-item bulb-gold"></div>
+      </div>
+      <div class="fairy-light-unit">
+        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
+          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        <div class="bulb-socket-cap"></div>
+        <div class="bulb-item bulb-red"></div>
+      </div>
+      <div class="fairy-light-unit">
+        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
+          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        <div class="bulb-socket-cap"></div>
+        <div class="bulb-item bulb-green"></div>
+      </div>
+      <div class="fairy-light-unit">
+        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
+          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        <div class="bulb-socket-cap"></div>
+        <div class="bulb-item bulb-blue"></div>
+      </div>
+      <div class="fairy-light-unit">
+        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
+          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        <div class="bulb-socket-cap"></div>
+        <div class="bulb-item bulb-gold"></div>
+      </div>
+      <div class="fairy-light-unit">
+        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
+          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        <div class="bulb-socket-cap"></div>
+        <div class="bulb-item bulb-pink"></div>
+      </div>
+      <div class="fairy-light-unit">
+        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
+          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        <div class="bulb-socket-cap"></div>
+        <div class="bulb-item bulb-red"></div>
+      </div>
+      <div class="fairy-light-unit">
+        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
+          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        <div class="bulb-socket-cap"></div>
+        <div class="bulb-item bulb-green"></div>
+      </div>
+      <div class="fairy-light-unit">
+        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
+          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        <div class="bulb-socket-cap"></div>
+        <div class="bulb-item bulb-blue"></div>
+      </div>
+      <div class="fairy-light-unit">
+        <svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none">
+          <path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        <div class="bulb-socket-cap"></div>
+        <div class="bulb-item bulb-gold"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. CỖ XE TUẦN LỘC SANTA BAY LƯỚT QUA BẦU TRỜ -->
+  <div id="santa-sleigh" class="santa-fly-track" aria-hidden="true">
+    <div class="stardust-tail"></div>
+  </div>
+
+  <!-- JAVASCRIPT -->
+  <script src="js/common.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>

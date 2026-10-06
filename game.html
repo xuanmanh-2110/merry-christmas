@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="vi" class="h-full game-html">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Trang Trí Cây Thông Noel 🎄 - Christmas Decoration Game</title>
+
+  <!-- GOOGLE FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@600;700;800&family=Dancing+Script:wght@400;500;600;700&family=Great+Vibes&family=Mountains+of+Christmas:wght@700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Quicksand:wght@500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- TAILWIND CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- FONT AWESOME ICONS CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- CANVAS-CONFETTI CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+  <!-- CUSTOM STYLES -->
+  <link rel="stylesheet" href="css/style.css?v=9.8">
+</head>
+
+<body class="game-page bg-[#1e0207] text-white flex flex-col min-h-screen min-h-[100dvh] !p-0 !m-0">
+  <!-- CANVAS HIỆU ỨNG TUYẾT RƠI & VỆT SAO -->
+  <canvas id="snow-canvas"></canvas>
+  <canvas id="magic-trail-canvas" class="magic-trail-canvas" aria-hidden="true"></canvas>
+
+  <!-- SVG DEFINITIONS CHO CẢNH QUAN GIÁNG SINH -->
+  <svg width="0" height="0" class="absolute pointer-events-none">
+    <defs>
+      <linearGradient id="garlandRedBauble" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#ff6b81" />
+        <stop offset="50%" stop-color="#ee5253" />
+        <stop offset="100%" stop-color="#a51717" />
+      </linearGradient>
+      <linearGradient id="garlandGoldBauble" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#fff9db" />
+        <stop offset="45%" stop-color="#ffd43b" />
+        <stop offset="100%" stop-color="#d97706" />
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <!-- DÂY ĐÈN LED GIÁNG SINH TREO MÀN HÌNH -->
+  <div class="fairy-lights-container" aria-hidden="true">
+    <div class="fairy-lights-track">
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-gold"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-red"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-green"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-blue"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-pink"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-gold"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-red"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-green"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-blue"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-gold"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-pink"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-red"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-green"></div></div>
+      <div class="fairy-light-unit"><svg class="wire-swag-svg" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M 0,2 C 26,2 32,22 50,22 C 68,22 74,2 100,2" fill="none" stroke="#16221c" stroke-width="2.2" stroke-linecap="round" /></svg><div class="bulb-socket-cap"></div><div class="bulb-item bulb-gold"></div></div>
+    </div>
+  </div>
+
+  <!-- CÀNH THÔNG & QUẢ CHÂU TRANG TRÍ 2 GÓC TRÊN MÀN HÌNH -->
+  <div class="corner-garland corner-garland-left" aria-hidden="true">
+    <svg viewBox="0 0 200 160" class="w-16 sm:w-28 md:w-40 h-auto overflow-visible filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+      <path d="M-20 -20 Q40 30 110 35 Q150 40 180 20" fill="none" stroke="#1b4332" stroke-width="12" stroke-linecap="round" />
+      <path d="M-20 -20 Q30 50 85 80 Q120 100 150 95" fill="none" stroke="#2d6a4f" stroke-width="8" stroke-linecap="round" />
+      <path d="M20 15 L35 45 M50 25 L75 55 M80 32 L115 60 M110 38 L145 55 M130 35 L165 38" stroke="#40916c" stroke-width="3" stroke-linecap="round" />
+      <path d="M10 30 L25 65 M40 50 L65 85 M65 65 L95 105 M95 80 L130 108" stroke="#52b788" stroke-width="2.5" stroke-linecap="round" />
+      <path d="M0 5 Q45 25 105 32 Q140 36 175 18" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity="0.9" />
+      <path d="M15 35 Q55 60 90 78 Q115 88 140 85" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" opacity="0.85" />
+      <circle cx="85" cy="45" r="4.5" fill="#dc2626" />
+      <circle cx="92" cy="48" r="4" fill="#b91c1c" />
+      <circle cx="88" cy="53" r="4.2" fill="#ef4444" />
+      <line x1="60" y1="35" x2="60" y2="95" stroke="#f5cf68" stroke-width="1.2" stroke-dasharray="2,2" />
+      <g class="swinging-bauble-left">
+        <circle cx="60" cy="115" r="18" fill="url(#garlandRedBauble)" filter="drop-shadow(0 6px 12px rgba(220,38,38,0.5))" />
+        <rect x="56" y="93" width="8" height="6" fill="#d4af37" rx="1.5" />
+        <path d="M45 115 Q60 125 75 115" fill="none" stroke="#fef08a" stroke-width="1.5" opacity="0.8" />
+        <circle cx="54" cy="108" r="2.5" fill="#ffffff" opacity="0.7" />
+      </g>
+      <line x1="125" y1="40" x2="125" y2="80" stroke="#f5cf68" stroke-width="1" />
+      <g class="swinging-bauble-right">
+        <circle cx="125" cy="92" r="12" fill="url(#garlandGoldBauble)" filter="drop-shadow(0 4px 10px rgba(245,207,104,0.6))" />
+        <rect x="122" y="78" width="6" height="4" fill="#b8860b" rx="1" />
+        <circle cx="121" cy="88" r="1.8" fill="#ffffff" opacity="0.8" />
+      </g>
+    </svg>
+  </div>
+
+  <div class="corner-garland corner-garland-right" aria-hidden="true">
+    <svg viewBox="0 0 200 160" class="w-16 sm:w-28 md:w-40 h-auto overflow-visible filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)] transform -scale-x-100">
+      <path d="M-20 -20 Q40 30 110 35 Q150 40 180 20" fill="none" stroke="#1b4332" stroke-width="12" stroke-linecap="round" />
+      <path d="M-20 -20 Q30 50 85 80 Q120 100 150 95" fill="none" stroke="#2d6a4f" stroke-width="8" stroke-linecap="round" />
+      <path d="M20 15 L35 45 M50 25 L75 55 M80 32 L115 60 M110 38 L145 55 M130 35 L165 38" stroke="#40916c" stroke-width="3" stroke-linecap="round" />
+      <path d="M0 5 Q45 25 105 32 Q140 36 175 18" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity="0.9" />
+      <line x1="75" y1="35" x2="75" y2="85" stroke="#f5cf68" stroke-width="1.2" stroke-dasharray="2,2" />
+      <g class="swinging-bauble-left">
+        <path d="M65 105 C65 92, 85 92, 85 105 L89 116 C91 120, 60 120, 62 116 Z" fill="url(#garlandGoldBauble)" filter="drop-shadow(0 6px 12px rgba(245,207,104,0.5))" />
+        <circle cx="75" cy="120" r="3.5" fill="#f59e0b" />
+        <path d="M75 92 C70 85, 62 88, 73 91 Z" fill="#ef4444" />
+        <path d="M75 92 C80 85, 88 88, 77 91 Z" fill="#ef4444" />
+      </g>
+    </svg>
+  </div>
+
+  <div class="intro-overlay standalone-overlay">
+    <div class="intro-backdrop"></div>
+    <div class="intro-card-container">
+      <div class="intro-card-step active standalone-subpage">
+        <div class="intro-parchment-card intro-subpage-card">
+          <!-- 4 Góc hoa văn viền vàng hoàng gia -->
+          <div class="intro-corner-ornament intro-corner-tl"></div>
+          <div class="intro-corner-ornament intro-corner-tr"></div>
+          <div class="intro-corner-ornament intro-corner-bl"></div>
+          <div class="intro-corner-ornament intro-corner-br"></div>
+
+          <!-- Bông tuyết & Ngôi sao trang trí lấp lánh -->
+          <div class="intro-sparkle intro-sparkle-1">✦</div>
+          <div class="intro-sparkle intro-sparkle-2">❄</div>
+          <div class="intro-sparkle intro-sparkle-3">★</div>
+          <div class="intro-sparkle intro-sparkle-4">❄</div>
+          <div class="intro-sparkle intro-sparkle-5">✦</div>
+          <div class="intro-sparkle intro-sparkle-6">★</div>
+
+          <!-- TIÊU ĐỀ TRANG ĐỒNG BỘ 100% THEO PHONG CÁCH PHOTOBOOTH -->
+          <div class="subpage-header">
+            <div class="intro-date-badge">
+              <span class="intro-badge-deco">✦</span> GAME TRANG TRÍ GIÁNG SINH <span class="intro-badge-deco">✦</span>
+            </div>
+            <h2 class="intro-script-title subpage-title">Trang Trí Cây Thông Noel</h2>
+            <div class="intro-gold-divider">
+              <span class="intro-divider-line"></span>
+              <span class="intro-divider-star">✦</span>
+              <span class="intro-divider-line"></span>
+            </div>
+            <p class="intro-hub-subtitle">Lưu lại khoảnh khắc ấm áp mùa Noel 🎄</p>
+          </div>
+
+          <!-- KHÔNG GIAN GAME CHÍNH (3 CỘT: CÂY THÔNG | ĐIỀU KHIỂN & BẢNG MÀU | GIÁ PHỤ KIỆN) -->
+          <main class="tree-game-layout w-full max-w-6xl xl:max-w-7xl 2xl:max-w-[1540px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 xl:gap-8 2xl:gap-10 items-center justify-center relative z-10 my-0 sm:my-1">
+        
+        <!-- CỘT TRÁI: CÂY THÔNG NOEL CHÍNH (5 CỘT) -->
+        <section class="lg:col-span-5 flex flex-col items-center justify-center relative">
+          <div id="tree-stage-wrapper" class="tree-stage-wrapper relative w-full max-w-[320px] sm:max-w-[360px] lg:max-w-[440px] xl:max-w-[520px] 2xl:max-w-[600px] h-[390px] sm:h-[430px] lg:h-[500px] xl:h-[600px] 2xl:h-[690px] flex items-center justify-center rounded-2xl bg-radial from-amber-500/15 via-amber-900/5 to-transparent">
+            
+            <!-- VÙNG CÂY THÔNG TƯƠNG TÁC (DROP ZONE) -->
+            <div id="tree-interactive-canvas" class="tree-interactive-canvas relative w-full h-full flex flex-col items-center justify-center overflow-visible">
+
+              <!-- NGÔI SAO TRÊN ĐỈNH CÂY THÔNG CÓ THỂ ĐỔI MÀU (BẤM HOẶC CHỌN MÀU) -->
+              <div id="tree-star-topper" class="tree-star-topper" title="Bấm để đổi màu ngôi sao đỉnh cây!">
+                <!-- Render SVG ngôi sao 3D đổi màu bằng JS -->
+              </div>
+
+              <!-- HÌNH CÂY THÔNG CHÍNH (ẢNH NỀN TÁCH TRONG SUỐT THEO YÊU CẦU) -->
+              <div id="tree-pine-container" class="tree-pine-container w-[92%] sm:w-[96%] h-full relative flex items-center justify-center">
+                <!-- Bóng đổ mềm dưới gốc cây -->
+                <div class="tree-ground-shadow absolute bottom-1 w-[70%] h-6 bg-black/60 rounded-full blur-[8px] pointer-events-none"></div>
+
+                <!-- Ảnh Cây Thông Noel Tách Nền Studio -->
+                <img id="tree-real-img" src="assets/images/tree_real.png" alt="Cây Thông Noel"
+                     class="w-full h-full object-contain pointer-events-none select-none drop-shadow-[0_15px_30px_rgba(0,0,0,0.85)] transition-all duration-300" />
+              </div>
+
+              <!-- LỚP ĐÈN LED PHÁT SÁNG LUNG LINH (DÂY BÓNG ĐÈN ĐỔI MÀU) -->
+              <div id="tree-led-lights-overlay" class="tree-led-lights-overlay absolute inset-0 pointer-events-none z-10">
+                <!-- Các bóng đèn LED render động bằng JS -->
+              </div>
+
+              <!-- LỚP CÁC PHỤ KIỆN TREO TRÊN CÂY (ORNAMENTS PLACED) -->
+              <div id="tree-placed-ornaments" class="tree-placed-ornaments absolute inset-0 z-20">
+                <!-- Các phụ kiện người dùng treo trên cây -->
+              </div>
+
+              <!-- VÙNG ĐỒ TRANG TRÍ DƯỚI GỐC CÂY (KÉO THẢ TỰ DO DƯỚI GỐC CÂY) -->
+              <div id="tree-ground-decorations" class="tree-ground-decorations absolute inset-0 pointer-events-none z-25">
+                <!-- Đồ trang trí dưới đất kéo thả tự do ở đây -->
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+        <!-- CỘT GIỮA: MÀU ĐÈN LED BÔNG TUYẾT, MÀU NGÔI SAO & ĐIỀU KHIỂN (3 CỘT) -->
+        <section class="lg:col-span-3 flex flex-col items-center justify-center gap-3 sm:gap-3.5 xl:gap-4 2xl:gap-5 w-full pt-1 lg:pt-2">
+          
+          <!-- HỘP MÀU ĐÈN LED BÔNG TUYẾT (6 Ô MÀU NẰM TRÊN 1 HÀNG) -->
+          <div class="tree-led-picker-box w-full max-w-[280px] xl:max-w-[330px] 2xl:max-w-[350px] bg-[#22040c]/90 border border-amber-400/40 rounded-2xl p-2.5 sm:p-3 xl:p-3.5 2xl:p-4 shadow-xl backdrop-blur-sm flex flex-col items-center">
+            <div class="flex items-center justify-center gap-1.5 text-xs xl:text-[13px] 2xl:text-sm font-bold text-amber-300 uppercase tracking-widest mb-2">
+              <span>❄</span> <span>MÀU ĐÈN LED BÔNG TUYẾT</span> <span>❄</span>
+            </div>
+
+            <!-- HÀNG 6 Ô MÀU ĐÈN LED CỐ ĐỊNH 1 HÀNG (GRID 6 CỘT) -->
+            <div class="grid grid-cols-6 gap-2 xl:gap-2.5 2xl:gap-3 w-full max-w-[250px] xl:max-w-[290px] 2xl:max-w-[315px] place-items-center">
+              <button type="button" class="led-color-swatch-btn active" data-led="red" style="background: #ef4444;" title="Đèn LED Đỏ"></button>
+              <button type="button" class="led-color-swatch-btn" data-led="green" style="background: #22c55e;" title="Đèn LED Xanh Lá"></button>
+              <button type="button" class="led-color-swatch-btn" data-led="blue" style="background: #3b82f6;" title="Đèn LED Xanh Dương"></button>
+              <button type="button" class="led-color-swatch-btn" data-led="yellow" style="background: #facc15;" title="Đèn LED Vàng Ấm"></button>
+              <button type="button" class="led-color-swatch-btn" data-led="white" style="background: #ffffff;" title="Đèn LED Trắng"></button>
+              <button type="button" class="led-color-swatch-btn" data-led="gold" style="background: #f59e0b;" title="Đèn LED Vàng Kim"></button>
+            </div>
+          </div>
+
+          <!-- HỘP MÀU NGÔI SAO ĐỈNH CÂY (6 Ô MÀU NẰM TRÊN 1 HÀNG) -->
+          <div class="tree-star-picker-box w-full max-w-[280px] xl:max-w-[330px] 2xl:max-w-[350px] bg-[#22040c]/90 border border-amber-400/40 rounded-2xl p-2.5 sm:p-3 xl:p-3.5 2xl:p-4 shadow-xl backdrop-blur-sm flex flex-col items-center">
+            <div class="flex items-center justify-center gap-1.5 text-xs xl:text-[13px] 2xl:text-sm font-bold text-amber-300 uppercase tracking-widest mb-2">
+              <span>★</span> <span>MÀU NGÔI SAO ĐỈNH CÂY</span> <span>★</span>
+            </div>
+
+            <!-- HÀNG 6 Ô MÀU NGÔI SAO (GRID 6 CỘT) -->
+            <div class="grid grid-cols-6 gap-2 xl:gap-2.5 2xl:gap-3 w-full max-w-[250px] xl:max-w-[290px] 2xl:max-w-[315px] place-items-center">
+              <button type="button" class="star-color-swatch-btn active" data-star="gold" style="background: linear-gradient(135deg, #fffbeb, #facc15);" title="Ngôi Sao Vàng Kim"></button>
+              <button type="button" class="star-color-swatch-btn" data-star="silver" style="background: linear-gradient(135deg, #ffffff, #94a3b8);" title="Ngôi Sao Bạc Tuyết"></button>
+              <button type="button" class="star-color-swatch-btn" data-star="red" style="background: linear-gradient(135deg, #f87171, #dc2626);" title="Ngôi Sao Đỏ Ruby"></button>
+              <button type="button" class="star-color-swatch-btn" data-star="blue" style="background: linear-gradient(135deg, #7dd3fc, #0284c7);" title="Ngôi Sao Xanh Lam"></button>
+              <button type="button" class="star-color-swatch-btn" data-star="green" style="background: linear-gradient(135deg, #86efac, #16a34a);" title="Ngôi Sao Xanh Ngọc"></button>
+              <button type="button" class="star-color-swatch-btn" data-star="pink" style="background: linear-gradient(135deg, #fb7185, #e11d48);" title="Ngôi Sao Hồng Pha Lê"></button>
+            </div>
+          </div>
+
+          <!-- CÁC NÚT ĐIỀU KHIỂN & HOÀN THÀNH -->
+          <div class="flex flex-col items-center gap-2 xl:gap-2.5 w-full pt-1">
+            <!-- Nút Hoàn Thành Trang Trí -->
+            <button id="btn-finish-tree" type="button"
+              class="tree-btn-finish w-full max-w-[260px] xl:max-w-[300px] 2xl:max-w-[325px] py-2.5 sm:py-3 xl:py-3.5 2xl:py-4 px-5 rounded-full font-bold text-xs sm:text-sm xl:text-base text-[#3b060f] flex items-center justify-center gap-2 shadow-[0_6px_20px_rgba(245,158,11,0.45)] hover:shadow-[0_8px_26px_rgba(255,215,0,0.6)] active:scale-95 transition-all cursor-pointer">
+              <i class="fa-solid fa-wand-magic-sparkles text-sm text-amber-900"></i>
+              <span>Hoàn Thành Trang Trí 🎄</span>
+            </button>
+
+            <!-- Nút Đặt lại trang trí từ đầu -->
+            <button id="btn-reset-tree" type="button"
+              class="text-amber-200/60 hover:text-amber-200 text-[11px] xl:text-xs flex items-center gap-1.5 transition-colors cursor-pointer py-0.5">
+              <i class="fa-solid fa-rotate-left text-[10px] xl:text-[11px]"></i>
+              <span>Đặt lại trang trí từ đầu</span>
+            </button>
+          </div>
+
+        </section>
+
+        <!-- CỘT PHẢI: GIÁ TREO PHỤ KIỆN CAO CẤP & KHAY ĐỒ GỐC CÂY (4 CỘT) -->
+        <section class="lg:col-span-4 flex flex-col items-center gap-3 sm:gap-4 w-full">
+          
+          <!-- HỘP 1: GIÁ TREO PHỤ KIỆN CAO CẤP (CHUẨN 2 TẦNG KỆ NHƯ ẢNH 1) -->
+          <div class="tree-shelf-cabinet w-full max-w-[360px] sm:max-w-[400px] lg:max-w-none bg-[#1e0309]/90 border-2 border-amber-400/40 rounded-2xl p-2.5 sm:p-3 xl:p-4 2xl:p-4.5 shadow-2xl relative overflow-hidden backdrop-blur-sm">
+            <!-- TIÊU ĐỀ GIÁ TREO -->
+            <div class="flex items-center justify-center gap-1.5 text-xs xl:text-[13px] 2xl:text-sm font-bold text-amber-300 uppercase tracking-widest mb-2 xl:mb-2.5">
+              <span>❄</span> <span>GIÁ TREO PHỤ KIỆN CAO CẤP</span> <span>❄</span>
+            </div>
+
+            <!-- TẦNG 1: 4 MÓN PHỤ KIỆN TRÊN (BÁNH GỪNG, CẦU TUYẾT, KẸP HẠT DẺ, NƠ ĐỎ) -->
+            <div class="shelf-tier-row mb-2 pb-2 relative">
+              <div class="grid grid-cols-4 gap-2 sm:gap-2.5 w-full">
+                <!-- 1. Người bánh gừng -->
+                <button type="button" class="accessory-slot-btn" data-type="gingerbread" title="Người bánh gừng">
+                  <div class="accessory-icon-box" id="slot-icon-gingerbread"></div>
+                </button>
+
+                <!-- 2. Quả cầu tuyết -->
+                <button type="button" class="accessory-slot-btn" data-type="snowglobe" title="Quả cầu tuyết">
+                  <div class="accessory-icon-box" id="slot-icon-snowglobe"></div>
+                </button>
+
+                <!-- 3. Chú lính kẹp hạt dẻ -->
+                <button type="button" class="accessory-slot-btn" data-type="nutcracker" title="Chú lính kẹp hạt dẻ">
+                  <div class="accessory-icon-box" id="slot-icon-nutcracker"></div>
+                </button>
+
+                <!-- 4. Chiếc nơ đỏ rực rỡ -->
+                <button type="button" class="accessory-slot-btn" data-type="bow" title="Chiếc nơ đỏ lụa">
+                  <div class="accessory-icon-box" id="slot-icon-bow"></div>
+                </button>
+              </div>
+              <!-- Thanh gỗ đỡ kệ 1 -->
+              <div class="shelf-wood-bar mt-1.5 w-full h-1.5 rounded-full bg-gradient-to-r from-amber-900 via-amber-700 to-amber-900 border-t border-amber-500/40 shadow-inner"></div>
+            </div>
+
+            <!-- TẦNG 2: 4 MÓN (CHÂU ĐỎ, TUẦN LỘC, KẸO GẬY, CHÂU VÀNG) -->
+            <div class="shelf-tier-row mb-2 pb-2 relative">
+              <div class="grid grid-cols-4 gap-2 sm:gap-2.5 w-full">
+                <!-- 5. Quả châu đỏ -->
+                <button type="button" class="accessory-slot-btn" data-type="bauble_red" title="Quả châu đỏ">
+                  <div class="accessory-icon-box" id="slot-icon-bauble_red"></div>
+                </button>
+
+                <!-- 6. Mặt chú tuần lộc -->
+                <button type="button" class="accessory-slot-btn" data-type="reindeer" title="Chú tuần lộc Rudolph">
+                  <div class="accessory-icon-box" id="slot-icon-reindeer"></div>
+                </button>
+
+                <!-- 7. Kẹo gậy Giáng Sinh nơ xanh -->
+                <button type="button" class="accessory-slot-btn" data-type="candycane" title="Kẹo gậy Giáng Sinh">
+                  <div class="accessory-icon-box" id="slot-icon-candycane"></div>
+                </button>
+
+                <!-- 8. Quả châu vàng hoàng gia -->
+                <button type="button" class="accessory-slot-btn" data-type="bauble_gold" title="Quả châu vàng hoàng gia">
+                  <div class="accessory-icon-box" id="slot-icon-bauble_gold"></div>
+                </button>
+              </div>
+              <!-- Thanh gỗ đỡ kệ 2 -->
+              <div class="shelf-wood-bar mt-1.5 w-full h-1.5 rounded-full bg-gradient-to-r from-amber-900 via-amber-700 to-amber-900 border-t border-amber-500/40 shadow-inner"></div>
+            </div>
+
+            <!-- TẦNG 3: 4 MÓN (BỘ 3 CHÂU, CHÚ CHIM, SAO BẠC, SAO VÀNG) -->
+            <div class="shelf-tier-row mb-2 pb-2 relative">
+              <div class="grid grid-cols-4 gap-2 sm:gap-2.5 w-full">
+                <!-- 9. Bộ 3 quả châu -->
+                <button type="button" class="accessory-slot-btn" data-type="bauble_trio" title="Bộ 3 quả châu sắc màu">
+                  <div class="accessory-icon-box" id="slot-icon-bauble_trio"></div>
+                </button>
+
+                <!-- 10. Chú chim nhỏ -->
+                <button type="button" class="accessory-slot-btn" data-type="bird" title="Chú chim Giáng Sinh">
+                  <div class="accessory-icon-box" id="slot-icon-bird"></div>
+                </button>
+
+                <!-- 11. Ngôi sao bạc 3D -->
+                <button type="button" class="accessory-slot-btn" data-type="star_silver" title="Ngôi sao bạc lấp lánh">
+                  <div class="accessory-icon-box" id="slot-icon-star_silver"></div>
+                </button>
+
+                <!-- 12. Ngôi sao vàng 3D -->
+                <button type="button" class="accessory-slot-btn" data-type="star_gold" title="Ngôi sao vàng rực rỡ">
+                  <div class="accessory-icon-box" id="slot-icon-star_gold"></div>
+                </button>
+              </div>
+              <!-- Thanh gỗ đỡ kệ 3 -->
+              <div class="shelf-wood-bar mt-1.5 w-full h-1.5 rounded-full bg-gradient-to-r from-amber-900 via-amber-700 to-amber-900 border-t border-amber-500/40 shadow-inner"></div>
+            </div>
+
+            <!-- TẦNG 4: 4 MÓN (CHUÔNG VÀNG, CHIẾC TẤT, BÔNG TUYẾT, GẤU NOEL) -->
+            <div class="shelf-tier-row relative">
+              <div class="grid grid-cols-4 gap-2 sm:gap-2.5 w-full">
+                <!-- 13. Đôi chuông vàng -->
+                <button type="button" class="accessory-slot-btn" data-type="bell" title="Đôi chuông vàng Giáng Sinh">
+                  <div class="accessory-icon-box" id="slot-icon-bell"></div>
+                </button>
+
+                <!-- 14. Chiếc tất len đỏ -->
+                <button type="button" class="accessory-slot-btn" data-type="stocking" title="Chiếc tất quà Giáng Sinh">
+                  <div class="accessory-icon-box" id="slot-icon-stocking"></div>
+                </button>
+
+                <!-- 15. Bông tuyết pha lê -->
+                <button type="button" class="accessory-slot-btn" data-type="snowflake" title="Bông tuyết pha lê lấp lánh">
+                  <div class="accessory-icon-box" id="slot-icon-snowflake"></div>
+                </button>
+
+                <!-- 16. Chú gấu Noel -->
+                <button type="button" class="accessory-slot-btn" data-type="bear_santa" title="Chú gấu bông Giáng Sinh">
+                  <div class="accessory-icon-box" id="slot-icon-bear_santa"></div>
+                </button>
+              </div>
+              <!-- Thanh gỗ đỡ kệ 4 -->
+              <div class="shelf-wood-bar mt-1.5 w-full h-1.5 rounded-full bg-gradient-to-r from-amber-900 via-amber-700 to-amber-900 border-t border-amber-500/40 shadow-inner"></div>
+            </div>
+
+          </div>
+
+          <!-- HỘP 2: KHAY ĐỒ TRANG TRÍ DƯỚI GỐC (CHUẨN 5 MÓN NHƯ ẢNH 1) -->
+          <div class="tree-ground-tray-box w-full max-w-[360px] sm:max-w-[400px] lg:max-w-none bg-[#1e0309]/90 border-2 border-amber-400/40 rounded-2xl p-2.5 sm:p-3 xl:p-3.5 2xl:p-4 shadow-xl backdrop-blur-sm relative">
+            <div class="flex items-center justify-center gap-1.5 text-xs xl:text-[13px] 2xl:text-sm font-bold text-amber-300 uppercase tracking-widest mb-2">
+              <span>❄</span> <span>KHAY ĐỒ TRANG TRÍ DƯỚI GỐC</span> <span>❄</span>
+            </div>
+
+            <div class="grid grid-cols-5 gap-1.5 sm:gap-2 w-full">
+              <!-- 1. Hộp quà Noel -->
+              <button type="button" class="ground-item-slot-btn" data-ground="gifts" title="Hộp quà Giáng Sinh">
+                <div class="ground-icon-box" id="ground-icon-gifts"></div>
+              </button>
+
+              <!-- 2. Ly cacao nóng -->
+              <button type="button" class="ground-item-slot-btn" data-ground="cocoa" title="Ly cacao nóng hổi">
+                <div class="ground-icon-box" id="ground-icon-cocoa"></div>
+              </button>
+
+              <!-- 3. Đoàn tàu Giáng Sinh -->
+              <button type="button" class="ground-item-slot-btn" data-ground="train" title="Đoàn tàu hỏa Noel">
+                <div class="ground-icon-box" id="ground-icon-train"></div>
+              </button>
+
+              <!-- 4. Gấu bông Noel -->
+              <button type="button" class="ground-item-slot-btn" data-ground="teddy" title="Gấu bông đội nơ đỏ">
+                <div class="ground-icon-box" id="ground-icon-teddy"></div>
+              </button>
+
+              <!-- 5. Nến lung linh -->
+              <button type="button" class="ground-item-slot-btn" data-ground="candles" title="Nến thơm lung linh">
+                <div class="ground-icon-box" id="ground-icon-candles"></div>
+              </button>
+            </div>
+
+            <!-- Ngôi sao 4 cánh lấp lánh góc dưới khay đồ như Ảnh 1 -->
+            <div class="absolute -bottom-2 -right-2 text-amber-300 text-lg drop-shadow pointer-events-none animate-pulse">✦</div>
+          </div>
+
+        </section>
+
+      </main>
+
+      <!-- Thanh điều hướng chân trang: Đồng bộ chuẩn Photobooth -->
+      <div class="subpage-nav-bar">
+        <a href="index.html?step=hub" class="subpage-back-btn">
+          <i class="fa-solid fa-arrow-left text-xs"></i>
+          <span>Chọn món quà khác</span>
+        </a>
+      </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL THÔNG BÁO HOÀN THÀNH & TRAO CÂY THÔNG (HÌNH ẢNH 2 CHUẨN XÁC) -->
+  <div id="tree-completion-modal"
+    class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md hidden transition-all duration-300"
+    role="dialog" aria-modal="true">
+    
+    <!-- KHUNG MODAL HOÀNG GIA CHUẨN THEO ẢNH 2 -->
+    <div class="modal-card-royal relative max-w-lg w-full bg-[#1b0309] border-[2.5px] border-amber-300/80 rounded-2xl sm:rounded-3xl shadow-[0_0_60px_rgba(245,158,11,0.4)] pt-5 px-5 pb-9 sm:pt-7 sm:px-7 sm:pb-11 flex flex-col items-center overflow-visible">
+      
+      <!-- NÚT ĐÓNG (X) HOÀNG GIA NẰM NGOÀI GÓC ĐỂ KHÔNG CHÈN LÊN NHÁNH CÂY Ô RÔ -->
+      <button id="btn-close-completion-modal"
+        class="absolute -top-3.5 -right-3.5 sm:-top-4 sm:-right-4 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#24030b] border-2 border-amber-400 text-amber-300 hover:text-white hover:bg-amber-700 hover:scale-110 flex items-center justify-center text-sm sm:text-base cursor-pointer shadow-[0_4px_15px_rgba(0,0,0,0.85)] transition-all z-40"
+        title="Đóng">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <!-- GÓC TRÊN TRÁI: NHÁNH CÂY Ô RÔ & QUẢ ĐỎ (HOLLY LEAVES & BERRIES) -->
+      <div class="modal-corner-holly-tl absolute top-2.5 left-2.5 pointer-events-none">
+        <svg viewBox="0 0 60 60" class="w-10 h-10 sm:w-12 sm:h-12 drop-shadow">
+          <path d="M5,5 Q20,10 15,25 Q30,15 40,25 Q30,35 15,35 Z" fill="#15803d" />
+          <path d="M5,5 Q10,20 25,15 Q15,30 25,40 Q35,30 35,15 Z" fill="#166534" />
+          <!-- Quả đỏ -->
+          <circle cx="20" cy="20" r="4.5" fill="#ef4444" stroke="#991b1b" stroke-width="1" />
+          <circle cx="27" cy="18" r="4" fill="#dc2626" stroke="#991b1b" stroke-width="1" />
+          <circle cx="23" cy="26" r="4" fill="#b91c1c" stroke="#7f1d1d" stroke-width="1" />
+        </svg>
+      </div>
+
+      <!-- GÓC TRÊN PHẢI: NHÁNH CÂY Ô RÔ & QUẢ ĐỎ -->
+      <div class="modal-corner-holly-tr absolute top-2.5 right-2.5 pointer-events-none -scale-x-100">
+        <svg viewBox="0 0 60 60" class="w-10 h-10 sm:w-12 sm:h-12 drop-shadow">
+          <path d="M5,5 Q20,10 15,25 Q30,15 40,25 Q30,35 15,35 Z" fill="#15803d" />
+          <path d="M5,5 Q10,20 25,15 Q15,30 25,40 Q35,30 35,15 Z" fill="#166534" />
+          <!-- Quả đỏ -->
+          <circle cx="20" cy="20" r="4.5" fill="#ef4444" stroke="#991b1b" stroke-width="1" />
+          <circle cx="27" cy="18" r="4" fill="#dc2626" stroke="#991b1b" stroke-width="1" />
+          <circle cx="23" cy="26" r="4" fill="#b91c1c" stroke="#7f1d1d" stroke-width="1" />
+        </svg>
+      </div>
+
+      <!-- GÓC DƯỚI TRÁI: CHÚ LÍNH KẸP HẠT DẺ ĐỨNG BẢO VỆ -->
+      <div class="modal-nutcracker-bl absolute bottom-3.5 left-3 sm:bottom-4 sm:left-4 pointer-events-none z-20">
+        <div id="modal-nutcracker-svg-left" class="w-10 h-20 sm:w-12 sm:h-24 drop-shadow-md"></div>
+      </div>
+
+      <!-- GÓC DƯỚI PHẢI: CHÚ LÍNH KẸP HẠT DẺ ĐỨNG BẢO VỆ -->
+      <div class="modal-nutcracker-br absolute bottom-3.5 right-3 sm:bottom-4 sm:right-4 pointer-events-none z-20">
+        <div id="modal-nutcracker-svg-right" class="w-10 h-20 sm:w-12 sm:h-24 drop-shadow-md"></div>
+      </div>
+
+      <!-- BANNER TIÊU ĐỀ: CHÚC MỪNG BẠN! (CHUẨN THEO ẢNH 2) -->
+      <div class="modal-header-badge mb-1.5 text-center">
+        <div class="inline-flex items-center gap-2 px-6 py-1.5 rounded-full bg-[#2a040d] border border-amber-400 text-amber-300 font-bold text-base sm:text-xl tracking-wider drop-shadow shadow-md">
+          <span>❄</span> <span>CHÚC MỪNG BẠN!</span> <span>❄</span>
+        </div>
+      </div>
+
+      <p class="text-xs sm:text-sm text-amber-200/90 text-center mb-3 sm:mb-4">
+        Bạn đã trang trí xong cây thông Noel tuyệt đẹp của mình!
+      </p>
+
+      <!-- ĐĨA HUY CHƯƠNG VÀNG HOÀNG GIA CHỨA CÂY THÔNG HOÀN THIỆN (MEDALLION) -->
+      <div class="modal-medallion-container relative my-1 sm:my-2 flex items-center justify-center">
+        <!-- Vòng hào quang lấp lánh xung quanh -->
+        <div class="modal-sparkle-star star-1 absolute -top-3 -left-4 text-amber-300 text-lg animate-pulse">✦</div>
+        <div class="modal-sparkle-star star-2 absolute top-10 -right-5 text-amber-300 text-sm animate-pulse delay-150">★</div>
+        <div class="modal-sparkle-star star-3 absolute bottom-8 -left-5 text-amber-300 text-sm animate-pulse delay-300">✦</div>
+        <div class="modal-sparkle-star star-4 absolute -bottom-2 right-2 text-amber-300 text-lg animate-pulse delay-500">★</div>
+
+        <!-- ĐĨA TRÒN MẠ VÀNG (MEDAL DISK) -->
+        <div class="modal-gold-plate relative w-60 h-60 sm:w-68 sm:h-68 rounded-full border-[3.5px] border-[#fbbf24] shadow-[0_0_35px_rgba(245,158,11,0.5),inset_0_0_20px_rgba(0,0,0,0.8)] flex items-center justify-center overflow-hidden p-2">
+          <!-- Vòng vân kim loại đồng tâm -->
+          <div class="absolute inset-2 rounded-full border border-amber-300/40 pointer-events-none"></div>
+          <div class="absolute inset-4 rounded-full border border-amber-300/25 pointer-events-none"></div>
+          
+          <!-- HÌNH CÂY THÔNG THU NHỎ HOÀN CHỈNH TRONG ĐĨA VÀNG -->
+          <div id="modal-tree-display" class="w-full h-full relative flex items-center justify-center overflow-hidden">
+            <!-- Render cây thông kết quả tại đây -->
+          </div>
+        </div>
+      </div>
+
+      <!-- NÚT BẤM VÀNG HOÀNG GIA: NHẬN CÂY THÔNG NGAY! (CHUẨN ẢNH 2: NẰM GIỮA ĐÈ LÊN VIỀN DƯỚI, KHÔNG ĐÈ LÊN LÍNH KẸP HẠT DẺ) -->
+      <div class="modal-action-wrapper absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-30">
+        <button id="btn-claim-tree" type="button"
+          class="modal-btn-claim cursor-pointer">
+          <span>Nhận Cây Thông Ngay!</span>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- MODAL XÁC NHẬN LÀM MỚI CÂY THÔNG (ĐỒNG BỘ HOÀNG GIA GIÁNG SINH) -->
+  <div id="tree-reset-confirm-modal"
+    class="fixed inset-0 z-[120] flex items-center justify-center p-4 bg-black/25 backdrop-blur-[2px] hidden transition-all duration-300"
+    role="dialog" aria-modal="true">
+    
+    <div class="modal-card-royal relative max-w-[360px] sm:max-w-[400px] w-full bg-[#1b0309] border-[2px] border-amber-300/80 rounded-2xl sm:rounded-3xl shadow-[0_0_50px_rgba(245,158,11,0.45)] p-5 sm:p-6 flex flex-col items-center text-center overflow-hidden">
+      
+      <!-- NÚT ĐÓNG (X) -->
+      <button id="btn-cancel-reset-x" type="button" class="absolute top-3 right-3 text-white/50 hover:text-white p-1 text-lg cursor-pointer transition-colors z-20" title="Đóng">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <!-- GÓC TRÊN TRÁI: NHÁNH LÁ Ô RÔ -->
+      <div class="absolute top-2 left-2 pointer-events-none opacity-80">
+        <svg viewBox="0 0 40 40" class="w-7 h-7 drop-shadow">
+          <path d="M4,4 Q14,8 10,18 Q22,10 28,18 Q20,26 10,24 Z" fill="#15803d" />
+          <circle cx="14" cy="14" r="3" fill="#ef4444" stroke="#991b1b" stroke-width="0.8" />
+        </svg>
+      </div>
+
+      <!-- GÓC TRÊN PHẢI: NHÁNH LÁ Ô RÔ -->
+      <div class="absolute top-2 right-8 pointer-events-none opacity-80 -scale-x-100">
+        <svg viewBox="0 0 40 40" class="w-7 h-7 drop-shadow">
+          <path d="M4,4 Q14,8 10,18 Q22,10 28,18 Q20,26 10,24 Z" fill="#15803d" />
+          <circle cx="14" cy="14" r="3" fill="#ef4444" stroke="#991b1b" stroke-width="0.8" />
+        </svg>
+      </div>
+
+      <!-- BIỂU TƯỢNG XOAY TRÒN VÀNG RỰC RỠ -->
+      <div class="relative w-16 h-16 sm:w-18 sm:h-18 rounded-full bg-gradient-to-br from-amber-500/25 to-red-950/70 border-2 border-amber-300/80 flex items-center justify-center mb-3 shadow-[0_0_24px_rgba(245,158,11,0.4)]">
+        <i class="fa-solid fa-rotate-left text-2xl sm:text-3xl text-amber-300"></i>
+        <span class="absolute -top-1 -right-1 text-amber-300 text-sm animate-pulse">✨</span>
+      </div>
+
+      <!-- BANNER TIÊU ĐỀ: LÀM MỚI CÂY THÔNG -->
+      <div class="modal-header-badge mb-2">
+        <div class="inline-flex items-center gap-1.5 px-4 py-1 rounded-full bg-[#2a040d] border border-amber-400 text-amber-300 font-bold text-sm sm:text-base tracking-wider drop-shadow shadow-md">
+          <span>❄</span> <span>LÀM MỚI CÂY THÔNG?</span> <span>❄</span>
+        </div>
+      </div>
+
+      <!-- NỘI DUNG THÔNG BÁO -->
+      <p class="text-xs sm:text-sm text-amber-100/95 leading-relaxed px-1 mb-1.5 font-medium">
+        Bạn có muốn làm mới lại cây thông không?
+      </p>
+      <p class="text-[11px] sm:text-xs text-amber-300/75 leading-relaxed px-2 mb-5">
+        Toàn bộ phụ kiện và đồ trang trí sẽ được dọn sạch để bạn bắt đầu trang trí lại từ đầu.
+      </p>
+
+      <!-- 2 NÚT HÀNH ĐỘNG: HỦY vs ĐỒNG Ý LÀM MỚI -->
+      <div class="grid grid-cols-2 gap-3 w-full pt-1">
+        <!-- Nút Huỷ (Giữ lại trang trí hiện tại) -->
+        <button id="btn-cancel-reset" type="button"
+          class="py-2.5 px-4 rounded-full font-semibold text-xs sm:text-sm text-amber-200/90 bg-white/10 hover:bg-white/20 border border-amber-300/40 transition-all cursor-pointer active:scale-95 flex items-center justify-center gap-1.5 shadow-sm">
+          <i class="fa-solid fa-xmark text-[11px]"></i>
+          <span>Huỷ bỏ</span>
+        </button>
+
+        <!-- Nút Đồng ý làm mới -->
+        <button id="btn-confirm-reset" type="button"
+          class="py-2.5 px-4 rounded-full font-bold text-xs sm:text-sm text-[#3b060f] bg-gradient-to-r from-[#ffd700] via-[#f59e0b] to-[#d97706] hover:from-[#fffbeb] hover:to-[#f59e0b] border border-amber-200 shadow-[0_4px_18px_rgba(245,158,11,0.5)] hover:shadow-[0_6px_22px_rgba(255,215,0,0.7)] transition-all cursor-pointer active:scale-95 flex items-center justify-center gap-1.5">
+          <i class="fa-solid fa-rotate-left text-[11px]"></i>
+          <span>Làm Mới</span>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- JAVASCRIPT -->
+  <script src="js/common.js"></script>
+  <script src="js/game.js?v=9.5"></script>
+</body>
+
+</html>
