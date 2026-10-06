@@ -792,17 +792,21 @@
   }
 
   // 7b. CUSTOM POLAROID PHOTO UPLOAD & LOCALSTORAGE
+  const DEFAULT_LETTER_PHOTO = 'assets/letter_girl_default.jpg';
+
   function initPolaroidPhoto() {
     const polaroidBox = document.getElementById('polaroid-frame-box');
     const fileInput = document.getElementById('polaroid-file-input');
     const photoImg = document.getElementById('polaroid-img-el');
     const btnChangePhoto = document.getElementById('btn-change-photo');
 
-    // 1. Load saved custom photo from localStorage if present
+    // 1. Load saved custom photo from localStorage if present, otherwise fallback to new default
     try {
-      const savedPhoto = localStorage.getItem('custom_letter_photo') || localStorage.getItem('photobooth_photo');
+      const savedPhoto = localStorage.getItem('custom_letter_photo_v2');
       if (savedPhoto && photoImg) {
         photoImg.src = savedPhoto;
+      } else if (photoImg) {
+        photoImg.src = DEFAULT_LETTER_PHOTO;
       }
     } catch (e) {
       console.warn('Cannot read localStorage', e);
@@ -848,7 +852,7 @@
               // Đã là hình vuông -> Áp dụng ngay
               photoImg.src = dataUrl;
               try {
-                localStorage.setItem('custom_letter_photo', dataUrl);
+                localStorage.setItem('custom_letter_photo_v2', dataUrl);
               } catch (err) {
                 console.warn('Storage quota exceeded, photo will remain in memory for this session');
               }
@@ -994,7 +998,7 @@
         }
 
         try {
-          localStorage.setItem('custom_letter_photo', croppedDataUrl);
+          localStorage.setItem('custom_letter_photo_v2', croppedDataUrl);
         } catch (err) {
           console.warn('Storage quota exceeded, photo stored for this session');
         }
