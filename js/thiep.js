@@ -174,14 +174,8 @@
 
   let isCardOpened = false;
 
-  // Tải sẵn nội dung embedded-fonts.css để nhúng trực tiếp dạng inline style vào clone khi html2canvas xuất ảnh
+  // Biến đệm font chỉ tải khi người dùng nhấn nút xuất ảnh (Lazy Load) để tiết kiệm 730KB RAM lúc duyệt thiệp
   let cachedEmbeddedFontsCss = '';
-  try {
-    fetch('css/embedded-fonts.css?v=10.0')
-      .then(r => r.text())
-      .then(t => { cachedEmbeddedFontsCss = t; })
-      .catch(() => {});
-  } catch (_) {}
 
   function openEnvelope() {
     if (isCardOpened) return;
@@ -513,7 +507,7 @@
       const isMobile = window.innerWidth < 640 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
       const canvas = await html2canvas(letterEl, {
-        scale: isMobile ? 3 : 2.5,
+        scale: isMobile ? 2.2 : 2.5,
         useCORS: true,
         allowTaint: false,
         backgroundColor: '#590918', // Nền đỏ rượu trầm sang trọng đồng điệu tấm thiệp

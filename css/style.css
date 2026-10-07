@@ -2767,7 +2767,6 @@ body.card-opened-mode .toast-notice.show {
 .intro-card-step .subpage-nav-bar {
   opacity: 0;
   transform: translateY(22px);
-  will-change: transform, opacity, filter;
 }
 
 /* Khi bước trở thành ACTIVE: kích hoạt Staggered Animation với độ trễ (delay) tăng dần */
@@ -7419,29 +7418,76 @@ html.direct-hub-view #intro-step-4 .hub-card-item {
    Chống nóng máy, giật lag và giảm tải tối đa GPU/CPU trên iOS WebKit / Safari
    ========================================================================== */
 @media (max-width: 768px) {
-  /* Giảm bán kính backdrop-filter trên mobile để không làm nóng GPU */
+  /* 1. TẮT HOÀN TOÀN BACKDROP-FILTER TRÊN MOBILE ĐỂ TRIỆT TIÊU TẢI GPU & TIẾT KIỆM RAM ĐỒ HỌA */
   .header-brand-wrap,
   .music-toggle-btn,
   .controls-overlay,
   .photobooth-controls,
-  .color-dock-card {
-    -webkit-backdrop-filter: blur(5px) !important;
-    backdrop-filter: blur(5px) !important;
+  .color-dock-card,
+  .header-action-btn,
+  .control-panel,
+  .modal-overlay,
+  .modal-content,
+  .intro-parchment-card,
+  .glass-card,
+  .glassmorphism,
+  .festive-hud,
+  .hud-btn,
+  .hub-card-item,
+  .filter-option-btn,
+  .sticker-option-btn,
+  .sound-control-btn,
+  .mobile-menu-btn,
+  .preview-modal-backdrop,
+  .review-modal-box,
+  .tree-shelf-wrapper,
+  .flower-choice-bar,
+  .flower-palette-dock,
+  .tree-color-dock,
+  .bouquet-action-bar,
+  .photobooth-palette-dock,
+  .photobooth-count-badge,
+  .photobooth-badge,
+  .quick-menu-modal {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
   }
 
-  /* Đơn giản hóa bóng đổ kép phức tạp trên ảnh intro */
+  /* Thay bằng màu nền bán trong suốt sang trọng, không cần GPU tính toán blur */
+  .modal-content,
+  .review-modal-box,
+  .quick-menu-modal {
+    background: rgba(10, 16, 28, 0.95) !important;
+  }
+
+  .photobooth-controls,
+  .color-dock-card,
+  .tree-shelf-wrapper,
+  .flower-choice-bar {
+    background: rgba(15, 23, 42, 0.92) !important;
+  }
+
+  /* 2. ĐƠN GIẢN HÓA BÓNG ĐỔ VÀ BỘ LỌC ĐỂ KHÔNG GÂY TỤT FPS */
   .intro-img-bow,
   .intro-img-bear,
   .intro-img-cat {
-    filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.6)) !important;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5)) !important;
+  }
+
+  /* Tắt drop-shadow liên tục trên SVG đang đung đưa */
+  .swinging-bauble-left svg,
+  .swinging-bauble-right svg,
+  .swinging-bauble-left circle,
+  .swinging-bauble-right circle {
+    filter: none !important;
   }
 
   /* Giảm bớt cường độ lóa sáng bóng đèn dây trên mobile */
   .bulb-item {
-    box-shadow: 0 2px 8px 1px currentColor !important;
+    box-shadow: 0 1px 4px 1px currentColor !important;
   }
 
-  /* Giảm tần số dao động quả châu trang trí */
+  /* Tần số dao động quả châu trang trí chậm lại */
   .swinging-bauble-left,
   .swinging-bauble-right {
     animation-duration: 6s !important;

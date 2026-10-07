@@ -53,14 +53,14 @@
       this.flakes = [];
       const isMobile = window.innerWidth < 768;
       this.isMobile = isMobile;
-      // Giảm mật độ hạt trên điện thoại để tiết kiệm GPU/CPU
-      this.flakeCount = window.innerWidth < 480 ? 28 : (isMobile ? 42 : 75);
+      // Tối ưu RAM & CPU trên điện thoại: Giảm mật độ hạt xuống mức vừa đủ đẹp, siêu mượt
+      this.flakeCount = window.innerWidth < 480 ? 18 : (isMobile ? 24 : 60);
       this.isRunning = true;
       this.rafId = null;
       this.wind = 0;
       this.windTarget = 0;
-      // Khống chế FPS: 32 FPS trên mobile (tiết kiệm 75% GPU/pin trên màn hình 120Hz ProMotion), 60 FPS trên desktop
-      this.targetInterval = isMobile ? 1000 / 32 : 1000 / 60;
+      // Khống chế FPS: 30 FPS trên mobile (tiết kiệm GPU/pin tối đa), 60 FPS trên desktop
+      this.targetInterval = isMobile ? 1000 / 30 : 1000 / 60;
       this.lastTime = 0;
 
       this.init();

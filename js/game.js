@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function getItemMarkup(type) {
     if (IMAGE_ORNAMENTS[type]) {
-      return `<img src="${IMAGE_ORNAMENTS[type]}" alt="${type}" class="w-full h-full object-contain pointer-events-none select-none drop-shadow" draggable="false" />`;
+      return `<img src="${IMAGE_ORNAMENTS[type]}" alt="${type}" class="w-full h-full object-contain pointer-events-none select-none drop-shadow" draggable="false" decoding="async" />`;
     }
     if (SVG_ASSETS[type]) {
       return SVG_ASSETS[type];
