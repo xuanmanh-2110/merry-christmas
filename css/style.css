@@ -4118,6 +4118,14 @@ body.bouquet-page {
   border-color: #22c55e;
   border-style: solid;
   background: #064e3b;
+  cursor: pointer;
+}
+
+.pb-thumb-slot.confirmed:hover {
+  border-color: #fef08a;
+  transform: translateY(-2px) scale(1.08);
+  box-shadow: 0 0 12px rgba(245, 207, 104, 0.75);
+  z-index: 5;
 }
 
 .pb-thumb-slot .slot-thumb-img {
@@ -4944,7 +4952,7 @@ body.bouquet-page {
   transition: opacity 0.2s ease;
 }
 
-/* 6 Ô ảnh bên trong khung strip */
+/* 6 Ô ảnh bên trong khung strip - Cố định hiển thị, không thao tác trực tiếp trên khung */
 .photobooth-slot {
   position: absolute;
   overflow: hidden;
@@ -4952,41 +4960,10 @@ body.bouquet-page {
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
+  cursor: default;
+  pointer-events: none; /* Khóa thao tác trên khung: chụp xong ảnh cố định, không xem/xóa tại khung */
+  user-select: none;
   z-index: 2;
-  transition: filter 0.2s ease, box-shadow 0.2s ease;
-}
-
-.photobooth-slot:hover {
-  filter: brightness(1.12);
-}
-
-.photobooth-slot.has-photo {
-  cursor: pointer;
-}
-
-.photobooth-slot.has-photo:hover {
-  filter: brightness(1.15);
-  box-shadow: 0 0 16px rgba(245, 207, 104, 0.8), inset 0 0 0 1.5px rgba(254, 240, 138, 0.9);
-}
-
-.photobooth-slot.has-photo:hover::after {
-  content: '🔍 Xem / Xóa';
-  position: absolute;
-  bottom: 6px;
-  right: 6px;
-  background: rgba(18, 2, 6, 0.9);
-  border: 1px solid rgba(245, 207, 104, 0.85);
-  color: #fef08a;
-  font-size: 10px;
-  font-weight: 700;
-  padding: 2.5px 8px;
-  border-radius: 9999px;
-  pointer-events: none;
-  backdrop-filter: blur(4px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
-  z-index: 10;
-  animation: fadeIn 0.15s ease;
 }
 
 .photobooth-slot-img {

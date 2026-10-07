@@ -524,6 +524,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Ô đã có ảnh
       if (photos[idx]) {
         slotEl.classList.add('confirmed');
+        slotEl.title = `Ảnh ô ${idx + 1}: Bấm vào để xem lại (giữ lại ảnh, xóa hoặc chụp lại)`;
         if (thumbImg) {
           thumbImg.src = photos[idx];
           thumbImg.classList.remove('hidden');
@@ -532,6 +533,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (numSpan) numSpan.classList.add('hidden');
       } else {
         slotEl.classList.remove('confirmed');
+        slotEl.title = `Ô ${idx + 1}: Bấm vào để chụp ảnh`;
         if (thumbImg) thumbImg.classList.add('hidden');
         if (checkIcon) checkIcon.classList.add('hidden');
         if (numSpan) numSpan.classList.remove('hidden');
@@ -550,7 +552,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Cập nhật ô tương ứng trên khung Photobooth Strip
+  // Cập nhật ô tương ứng trên khung Photobooth Strip (Cố định hiển thị ảnh, không thao tác trên khung)
   function updateStripSlot(index) {
     const slotEl = document.querySelector(`.photobooth-slot[data-index="${index}"]`);
     const imgEl = document.getElementById(`pb-slot-img-${index}`);
@@ -564,14 +566,14 @@ document.addEventListener('DOMContentLoaded', () => {
       if (emptyEl) emptyEl.classList.add('hidden');
       if (slotEl) {
         slotEl.classList.add('has-photo');
-        slotEl.title = `Chạm để xem lại hoặc xóa ảnh ${index + 1}`;
+        slotEl.removeAttribute('title');
       }
     } else {
       if (imgEl) imgEl.classList.add('hidden');
       if (emptyEl) emptyEl.classList.remove('hidden');
       if (slotEl) {
         slotEl.classList.remove('has-photo');
-        slotEl.title = `Bấm để chụp ảnh ${index + 1}`;
+        slotEl.removeAttribute('title');
       }
     }
   }
@@ -909,7 +911,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function deletePhotoAtSlot(slotIdx) {
-    if (slotIdx < 0 || slotIdx >= 6) return;
+    const maxSlots = getMaxSlots();
+    if (slotIdx < 0 || slotIdx >= maxSlots) return;
     photos[slotIdx] = null;
     updateStripSlot(slotIdx);
     currentPhotoIndex = slotIdx;
@@ -925,23 +928,28 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     } else if (currentState === 'CAMERA') {
       updateProgressUI();
+    } else if (currentState === 'PHOTO_REVIEW') {
+      capturedPhoto = null;
+      uncroppedUploadUrl = null;
+      startCamera();
     }
 
     if (window.XMAS_SHARED && window.XMAS_SHARED.playJingleBellSound) {
       window.XMAS_SHARED.playJingleBellSound(880);
     }
-    showToast(`🗑️ Đã xóa ảnh ô ${slotIdx + 1}. Bạn có thể chụp lại ô này nhé!`);
   }
 
   function retakePhotoAtSlot(slotIdx) {
-    if (slotIdx < 0 || slotIdx >= 6) return;
+    const maxSlots = getMaxSlots();
+    if (slotIdx < 0 || slotIdx >= maxSlots) return;
     photos[slotIdx] = null;
+    capturedPhoto = null;
+    uncroppedUploadUrl = null;
     updateStripSlot(slotIdx);
     currentPhotoIndex = slotIdx;
     updateProgressUI();
     closePhotoInspectModal();
     startCamera();
-    showToast(`📸 Sẵn sàng chụp lại ô ${slotIdx + 1}!`);
   }
 
   // 7c. DÁN & TRANG TRÍ STICKER NOEL TRÊN KHUNG PHOTOBOOTH (STICKER ENGINE)
@@ -1663,25 +1671,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Cho phép bấm vào từng ô thumbnail hoặc slot trên khung để xem lại/xóa (nếu đã có ảnh) hoặc chuyển sang chụp ô đó
+  // Chỉ cho phép bấm vào từng ô thumbnail ở thanh tiến trình (Ảnh 2) để xem lại (giữ lại ảnh, xóa hoặc chụp lại) hoặc chuyển sang chụp ô đó.
+  // Các ô trong khung ảnh (stripSlots) được cố định hoàn toàn, chụp xong không sửa/không xem/xóa trực tiếp từ khung.
   thumbSlots.forEach(el => {
     el.addEventListener('click', () => {
+      if (isCountingDown) return;
       const slotIdx = parseInt(el.dataset.slot, 10);
-      const maxSlots = getMaxSlots();
-      if (!isNaN(slotIdx) && slotIdx < maxSlots) {
-        if (photos[slotIdx]) {
-          openPhotoInspectModal(slotIdx);
-        } else {
-          currentPhotoIndex = slotIdx;
-          startCamera();
-        }
-      }
-    });
-  });
-
-  stripSlots.forEach(el => {
-    el.addEventListener('click', () => {
-      const slotIdx = parseInt(el.dataset.index, 10);
       const maxSlots = getMaxSlots();
       if (!isNaN(slotIdx) && slotIdx < maxSlots) {
         if (photos[slotIdx]) {

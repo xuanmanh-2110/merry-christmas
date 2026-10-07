@@ -527,8 +527,8 @@
 
               <!-- DẢI KHUNG PHOTOBOOTH 6 Ô (Tỷ lệ chuẩn 576 / 1024) -->
               <div id="photobooth-strip-container" class="photobooth-strip-container">
-                <!-- 6 Ô ảnh nằm dưới lớp khung -->
-                <div class="photobooth-slot pb-slot-0" data-index="0" title="Bấm để chụp lại ảnh 1">
+                <!-- 6 Ô ảnh nằm dưới lớp khung - Cố định hiển thị kết quả -->
+                <div class="photobooth-slot pb-slot-0" data-index="0">
                   <img id="pb-slot-img-0" class="photobooth-slot-img hidden" alt="Ô 1">
                   <div class="photobooth-slot-empty">
                     <i class="fa-solid fa-camera text-xs text-amber-300/40 mb-0.5"></i>
@@ -536,7 +536,7 @@
                   </div>
                 </div>
 
-                <div class="photobooth-slot pb-slot-1" data-index="1" title="Bấm để chụp lại ảnh 2">
+                <div class="photobooth-slot pb-slot-1" data-index="1">
                   <img id="pb-slot-img-1" class="photobooth-slot-img hidden" alt="Ô 2">
                   <div class="photobooth-slot-empty">
                     <i class="fa-solid fa-camera text-xs text-amber-300/40 mb-0.5"></i>
@@ -544,7 +544,7 @@
                   </div>
                 </div>
 
-                <div class="photobooth-slot pb-slot-2" data-index="2" title="Bấm để chụp lại ảnh 3">
+                <div class="photobooth-slot pb-slot-2" data-index="2">
                   <img id="pb-slot-img-2" class="photobooth-slot-img hidden" alt="Ô 3">
                   <div class="photobooth-slot-empty">
                     <i class="fa-solid fa-camera text-xs text-amber-300/40 mb-0.5"></i>
@@ -552,7 +552,7 @@
                   </div>
                 </div>
 
-                <div class="photobooth-slot pb-slot-3" data-index="3" title="Bấm để chụp lại ảnh 4">
+                <div class="photobooth-slot pb-slot-3" data-index="3">
                   <img id="pb-slot-img-3" class="photobooth-slot-img hidden" alt="Ô 4">
                   <div class="photobooth-slot-empty">
                     <i class="fa-solid fa-camera text-xs text-amber-300/40 mb-0.5"></i>
@@ -560,7 +560,7 @@
                   </div>
                 </div>
 
-                <div class="photobooth-slot pb-slot-4" data-index="4" title="Bấm để chụp lại ảnh 5">
+                <div class="photobooth-slot pb-slot-4" data-index="4">
                   <img id="pb-slot-img-4" class="photobooth-slot-img hidden" alt="Ô 5">
                   <div class="photobooth-slot-empty">
                     <i class="fa-solid fa-camera text-xs text-amber-300/40 mb-0.5"></i>
@@ -568,7 +568,7 @@
                   </div>
                 </div>
 
-                <div class="photobooth-slot pb-slot-5" data-index="5" title="Bấm để chụp lại ảnh 6">
+                <div class="photobooth-slot pb-slot-5" data-index="5">
                   <img id="pb-slot-img-5" class="photobooth-slot-img hidden" alt="Ô 6">
                   <div class="photobooth-slot-empty">
                     <i class="fa-solid fa-camera text-xs text-amber-300/40 mb-0.5"></i>
@@ -690,7 +690,7 @@
       </div>
 
       <p class="text-xs text-amber-100/75 text-center mb-2.5">
-        Xem chi tiết ảnh của bạn. Nếu chưa ưng ý, bạn có thể xóa ảnh này để chụp lại!
+        Xem chi tiết ảnh đã chụp. Bạn có thể chọn giữ lại ảnh, xóa ảnh hoặc chụp lại ô này:
       </p>
 
       <!-- Khung hiển thị ảnh phóng to -->
@@ -700,12 +700,20 @@
 
       <!-- Các nút thao tác -->
       <div class="flex items-center justify-center gap-2 sm:gap-2.5 w-full mt-3.5 pt-2.5 border-t border-amber-300/20 flex-wrap">
+        <!-- Nút Giữ lại ảnh -->
+        <button id="btn-inspect-keep" type="button"
+          class="photobooth-btn photobooth-btn-subtle text-xs sm:text-sm px-4 py-2 font-semibold transition-all hover:border-emerald-400"
+          title="Giữ lại ảnh hiện tại và đóng">
+          <i class="fa-solid fa-check text-xs text-emerald-400"></i>
+          <span>Giữ lại ảnh</span>
+        </button>
+
         <!-- Nút Xóa ảnh -->
         <button id="btn-inspect-delete" type="button"
           class="photobooth-btn photobooth-btn-red text-xs sm:text-sm px-4 py-2 font-bold shadow-lg active:scale-95 transition-all"
           title="Xóa ảnh khỏi ô này">
           <i class="fa-solid fa-trash-can text-xs"></i>
-          <span>Xóa ảnh này</span>
+          <span>Xóa ảnh</span>
         </button>
 
         <!-- Nút Chụp lại ô này -->
@@ -714,14 +722,6 @@
           title="Xóa và mở camera để chụp lại ô này ngay">
           <i class="fa-solid fa-camera-rotate text-xs"></i>
           <span>Chụp lại</span>
-        </button>
-
-        <!-- Nút Giữ ảnh / Đóng -->
-        <button id="btn-inspect-keep" type="button"
-          class="photobooth-btn photobooth-btn-subtle text-xs sm:text-sm px-3.5 py-2 font-semibold transition-all"
-          title="Giữ nguyên ảnh này">
-          <i class="fa-solid fa-check text-xs"></i>
-          <span>Giữ ảnh</span>
         </button>
       </div>
     </div>
